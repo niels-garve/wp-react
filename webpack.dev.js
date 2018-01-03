@@ -16,15 +16,15 @@ module.exports = {
     hot: true,
   },
   entry: {
-    server: 'webpack-dev-server/client?http://localhost:8080/', // Specify the local server port
+    server: 'webpack-dev-server/client?http://localhost:3000/', // Specify the local server port
     bundle: './src/app.jsx',
     editor: './src/editor.js',
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'wp-content/themes/wp-react-theme/build'),
     filename: '[name].js',
     // TODO adjust to your needs
-    publicPath: 'http://localhost:8080/wp-content/themes/wp-react-theme/build/',
+    publicPath: 'http://localhost:3000/wp-content/themes/wp-react-theme/build/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],

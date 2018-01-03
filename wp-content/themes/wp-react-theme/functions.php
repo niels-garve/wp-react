@@ -66,7 +66,7 @@ add_action( 'after_setup_theme', 'ng_after_setup_theme' );
  */
 function get_asset_by_name_and_extension( $name, $extension ) {
 	if ( getenv( 'ENVIRONMENT' ) == 'development' ) {
-		return "http://localhost:8080/wp-content/themes/wp-react-theme/build/{$name}.{$extension}";
+		return "http://localhost:3000/wp-content/themes/wp-react-theme/build/{$name}.{$extension}";
 	}
 
 	$base_url         = get_template_directory_uri();

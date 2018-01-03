@@ -5,11 +5,10 @@
   "main": "src/app.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run clean && webpack-dev-server --inline --progress --config webpack.dev.js",
+    "dev": "npm run clean && webpack-dev-server --inline --progress --config webpack.dev.js",
     "build": "npm run clean && webpack -p --progress --config webpack.production.js",
-    "clean": "rimraf ./build/* && rimraf ../../../sw.js && rimraf ../../../appcache",
-    "chrome": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --user-data-dir=/Users/nielsgarve/Library/Application\\ Support/Google/Chrome/Profile--dev --unsafely-treat-insecure-origin-as-secure=http://wp-react.test:8888",
-    "canary": "/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary --user-data-dir=/Users/nielsgarve/Library/Application\\ Support/Google/Chrome\\ Canary/Profile--dev --unsafely-treat-insecure-origin-as-secure=http://wp-react.test:8888"
+    "clean": "rimraf ./wp-content/themes/wp-react-theme/build/* && rimraf ./sw.js && rimraf ./appcache",
+    "docker": "docker-compose up -d && docker-compose logs -f wordpress"
   },
   "author": "Niels Garve <garve.niels@mailbox.org>",
   "license": "CC",

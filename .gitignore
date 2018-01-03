@@ -1,3 +1,11 @@
+## IDE
 .idea
+
+## webpack
 node_modules
-build
+wp-content/themes/wp-react-theme/build
+sw.js
+appcache
+
+## OSX
+.DS_Store

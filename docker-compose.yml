@@ -7,15 +7,32 @@ services:
       - 443:443
     volumes:
       - ./data:/data
+      - ./wp-content/themes/wp-react-theme:/app/wp-content/themes/wp-react-theme
+      - ./sw.js:/app/sw.js
+      - ./appcache/manifest.appcache:/app/appcache/manifest.appcache
+      - ./appcache/manifest.html:/app/appcache/manifest.html
     environment:
       DB_NAME: wordpress
       DB_PASS: root
       PLUGINS: >-
-        academic-bloggers-toolkit,
-        co-authors-plus,
-        [WP-API]https://github.com/WP-API/WP-API/archive/master.zip,
+        [yoast-to-rest-api]https://github.com/niels-garve/yoast-to-rest-api/archive/1.4.1.zip,
+        wp-optimize,
+        wp-migrate-db,
+        wordpress-seo,
+        w3-total-cache,
+        tinymce-clear-buttons,
+        regenerate-thumbnails,
+        https-redirection,
+        disable-emojis,
+        custom-post-type-ui,
+        [Basic-Auth]https://github.com/WP-API/Basic-Auth/archive/master.zip,
+        amazon-web-services,
+        amazon-s3-and-cloudfront,
+        advanced-custom-fields,
+        acf-to-rest-api,
+        acf-content-analysis-for-yoast-seo
   db:
-    image: mariadb:10 # or mysql:5.7
+    image: mysql:5.7
     volumes:
       - data:/var/lib/mysql
     environment:
@@ -26,5 +43,9 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - 22222:80
+  web:
+    environment:
+      - ENVIRONMENT=development
+
 volumes:
   data:
