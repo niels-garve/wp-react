@@ -1,0 +1,93 @@
+@import 'config';
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: $background;
+  color: $text-color;
+  font-family: 'Gill Sans', sans-serif;
+  font-size: $font-size;
+  font-weight: 400;
+  line-height: 1.45;
+  margin: 0;
+}
+
+// see http://type-scale.com/
+h1,
+h2,
+h3,
+h4 {
+  font-weight: inherit;
+  line-height: 1.2;
+  margin: 1.414em 0 .5em;
+}
+
+h1 {
+  font-size: 2.441em;
+}
+
+h2 {
+  font-size: 1.953em;
+}
+
+h3 {
+  font-size: 1.563em;
+}
+
+h4 {
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+p {
+  article & {
+    font-family: $font-family-readable;
+    font-size: $font-size-readable;
+    line-height: $line-height-readable;
+    max-width: $tracking;
+  }
+}
+
+ul,
+dl,
+p {
+  margin-bottom: 1.3em;
+  margin-top: 1rem; // different font sizes, same margin-top
+}
+
+small,
+figure {
+  font-size: .8em;
+}
+
+img {
+  border: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+a {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  color: $link-color;
+  text-decoration: none;
+
+  &:active,
+  &:visited {
+    color: $link-visited;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: currentColor;
+  }
+}

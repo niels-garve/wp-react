@@ -1,0 +1,50 @@
+@import 'config';
+
+button,
+.button {
+  -webkit-appearance: none;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1em;
+  line-height: 1.3em;
+  margin: 0;
+  padding: 6px 12px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  // see http://stackoverflow.com/questions/16077341/how-to-reset-all-default-styles-of-the-html5-button-element
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+button[type="submit"],
+.button--info {
+  background: $brand-color;
+  border-color: darken($brand-color, 5%);
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background: darken($brand-color, 10%);
+    border-color: darken($brand-color, 15%);
+  }
+}
+
+.button--light {
+  background: lighten($brand-color, 35%);
+  border-color: lighten($brand-color, 30%);
+  color: $black;
+
+  &:hover,
+  &:focus {
+    background: lighten($brand-color, 25%);
+    border-color: lighten($brand-color, 20%);
+  }
+}

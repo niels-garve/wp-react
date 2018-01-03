@@ -1,0 +1,13 @@
+@import '../shared/config';
+
+.default-error__headline {
+  margin-top: 20vh;
+}
+
+.default-error__text {
+  display: block;
+
+  .default-error--module & {
+    background: $error-background;
+  }
+}

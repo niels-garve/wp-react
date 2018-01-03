@@ -1,0 +1,43 @@
+@import 'config';
+
+.l-container {
+  margin: 0 $gutter;
+  max-width: 60.5rem;
+
+  @media (min-width: 62.5em) {
+    margin: 0 auto;
+  }
+}
+
+.l-main {
+  @media (min-width: 62.5em) {
+    display: grid;
+    grid-column-gap: $gutter;
+    grid-template-areas: 'content content side-content';
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.l-main__content,
+.l-main__side-content {
+  margin: 0 auto;
+  max-width: $content-width;
+
+  @media (min-width: 62.5em) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.l-main__content {
+  grid-area: content;
+}
+
+.l-main__side-content {
+  grid-area: side-content;
+  margin-top: 1.414em; // headlines margin
+
+  @media (min-width: 62.5em) {
+    margin-top: 0;
+  }
+}

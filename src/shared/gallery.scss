@@ -1,0 +1,27 @@
+@import 'config';
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-right: -$gutter;
+  padding: 0;
+}
+
+.gallery__item {
+  flex: 0 0 19.5rem;
+  margin: $gutter $gutter 0 0;
+
+  .gallery--small & {
+    flex-basis: 9.25rem;
+  }
+}
+
+.gallery__link.gallery__link {
+  border: 0;
+  display: block;
+
+  &:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .75);
+  }
+}

@@ -1,0 +1,12 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*.{js,jsx}]
+indent_style = space
+indent_size = 2
+
+[*.{css,pcss}]
+indent_style = space
+indent_size = 2

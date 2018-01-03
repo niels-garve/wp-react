@@ -1,0 +1,45 @@
+@import 'config';
+
+.lazy-load-iframe {
+  background: $black;
+  margin: $gutter 0 0;
+  position: relative;
+}
+
+.lazy-load-iframe__thumbnail {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.lazy-load-iframe__load-wrapper {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.lazy-load-iframe__load {
+  cursor: pointer;
+  margin: .5em;
+}
+
+.lazy-load-iframe__iframe {
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 */
+  position: relative;
+
+  iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}

@@ -1,0 +1,32 @@
+@import 'shared/config';
+@import 'shared/mixins';
+@import 'shared/atoms';
+@import 'shared/buttons';
+@import 'shared/gallery';
+@import 'shared/lazy-load-iframe';
+
+body {
+  background-color: $white;
+  margin: 0 $gutter;
+  max-width: $content-width;
+}
+
+p,
+small {
+  font-family: $font-family-readable;
+  font-size: $font-size-readable;
+  line-height: $line-height-readable;
+}
+
+.lazy-load-iframe::before {
+  color: $white;
+  content: 'preview';
+  left: .25em;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.lazy-load-iframe__load {
+  display: none;
+}

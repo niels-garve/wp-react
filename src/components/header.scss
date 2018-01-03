@@ -1,0 +1,134 @@
+@import '../shared/mixins';
+@import '../shared/config';
+
+.header {
+  background: $brand-color;
+  color: $white;
+
+  @media (min-width: 768px) {
+    margin: 0 0 3em;
+    padding: 1em 0 0;
+  }
+}
+
+.header__container {
+  @media (min-width: 768px) {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.header__toolbar {
+  @include clearfix;
+}
+
+.header__brand.header__brand {
+  border: 0;
+  color: $white;
+  display: block;
+  float: left;
+  font-size: 1.25em;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 1.414em 0 .5em;
+
+  @media (min-width: 768px) {
+    float: none;
+    margin: 0;
+  }
+}
+
+.header__menu-button {
+  -webkit-appearance: button;
+  background: transparent none;
+  border: 0;
+  cursor: pointer;
+  float: right;
+  margin: 1.414em 0 0;
+  padding: .5em 10px;
+
+  @media (min-width: 768px) {
+    display: none;
+    float: none;
+  }
+}
+
+.header__sr-only {
+  @include visuallyhidden;
+}
+
+.header__menu-button-bar {
+  background: $white;
+  border-radius: 1px;
+  display: block;
+  height: 2px;
+  width: 24px;
+}
+
+.header__menu-button-bar + .header__menu-button-bar {
+  margin-top: 5px;
+}
+
+.header__menu {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+    margin: 0 0 0 2em;
+  }
+
+  &.is-expanded {
+    display: block;
+  }
+}
+
+.header__menu-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header__menu-items {
+  @media (min-width: 768px) {
+    @include clearfix;
+  }
+}
+
+.header__menu-item {
+  @media (min-width: 768px) {
+    border: 0;
+    float: left;
+    margin: 0 0 0 1em;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+}
+
+.header__menu-link.header__menu-link {
+  border: 0;
+  color: $white;
+  display: block;
+  line-height: 1.3em;
+  padding: 12px 0;
+  text-decoration: none;
+
+  @media (min-width: 768px) {
+    &::before {
+      content: '/';
+    }
+
+    &:hover,
+    &:focus,
+    &.active {
+      text-decoration: underline;
+    }
+  }
+}
+
+.header__content {
+  flex: 0 0 100%;
+  overflow: auto; // "lock up" collapsing margins
+}
