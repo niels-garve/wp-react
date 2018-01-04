@@ -66,7 +66,7 @@ add_action( 'after_setup_theme', 'ng_after_setup_theme' );
  */
 function get_asset_by_name_and_extension( $name, $extension ) {
 	if ( getenv( 'ENVIRONMENT' ) == 'development' ) {
-		return "http://localhost:8080/wp-content/themes/wp-react-theme/build/{$name}.{$extension}";
+		return "http://localhost:3000/wp-content/themes/wp-react-theme/build/{$name}.{$extension}";
 	}
 
 	$base_url         = get_template_directory_uri();
@@ -379,7 +379,6 @@ add_filter( 'rest_prepare_revision', 'ng_rest_prepare_revisions', 10, 2 );
  */
 function ng_mce_buttons( $buttons ) {
 	$remove_buttons = array(
-		'blockquote',
 		'alignleft',
 		'aligncenter',
 		'alignright',
@@ -642,14 +641,13 @@ if ( function_exists( "register_field_group" ) ) {
 				'name'         => 'header',
 				'type'         => 'post_object',
 				'instructions' => 'Hier kannst du einen Header für Deine Seite wählen. Neue Header verwaltest du im Menü "Header".',
-				'required'     => 1,
 				'post_type'    => array(
 					0 => 'headers',
 				),
 				'taxonomy'     => array(
 					0 => 'all',
 				),
-				'allow_null'   => 0,
+				'allow_null'   => 1,
 				'multiple'     => 0,
 			),
 			array(
@@ -673,14 +671,13 @@ if ( function_exists( "register_field_group" ) ) {
 				'name'         => 'footer',
 				'type'         => 'post_object',
 				'instructions' => 'Hier kannst du einen Footer für Deine Seite wählen. Neue Footer verwaltest du im Menü "Footer".',
-				'required'     => 1,
 				'post_type'    => array(
 					0 => 'footers',
 				),
 				'taxonomy'     => array(
 					0 => 'all',
 				),
-				'allow_null'   => 0,
+				'allow_null'   => 1,
 				'multiple'     => 0,
 			),
 		),
@@ -712,14 +709,13 @@ if ( function_exists( "register_field_group" ) ) {
 				'name'         => 'header',
 				'type'         => 'post_object',
 				'instructions' => 'Hier kannst du einen Header für die Detailansicht Deines Posts wählen. Neue Header verwaltest du im Menü "Header".',
-				'required'     => 1,
 				'post_type'    => array(
 					0 => 'headers',
 				),
 				'taxonomy'     => array(
 					0 => 'all',
 				),
-				'allow_null'   => 0,
+				'allow_null'   => 1,
 				'multiple'     => 0,
 			),
 			array(
@@ -743,14 +739,13 @@ if ( function_exists( "register_field_group" ) ) {
 				'name'         => 'footer',
 				'type'         => 'post_object',
 				'instructions' => 'Hier kannst du einen Footer für die Detailansicht Deines Posts wählen. Neue Footer verwaltest du im Menü "Footer".',
-				'required'     => 1,
 				'post_type'    => array(
 					0 => 'footers',
 				),
 				'taxonomy'     => array(
 					0 => 'all',
 				),
-				'allow_null'   => 0,
+				'allow_null'   => 1,
 				'multiple'     => 0,
 			),
 		),

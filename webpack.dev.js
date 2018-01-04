@@ -14,17 +14,16 @@ module.exports = {
       'Access-Control-Allow-Origin': '*'
     },
     hot: true,
+    port: 3000,
   },
   entry: {
-    server: 'webpack-dev-server/client?http://localhost:8080/', // Specify the local server port
     bundle: './src/app.jsx',
     editor: './src/editor.js',
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'wp-content/themes/wp-react-theme/build'),
     filename: '[name].js',
-    // TODO adjust to your needs
-    publicPath: 'http://localhost:8080/wp-content/themes/wp-react-theme/build/',
+    publicPath: '/wp-content/themes/wp-react-theme/build/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -92,7 +91,6 @@ module.exports = {
     //   name: 'name',
     //   short_name: 'short_name',
     //   description: 'description',
-    //   start_url: '/home',
     //   background_color: '#f9f6f6',
     //   theme_color: '#5a3a3b',
     //   icons: [
@@ -117,7 +115,7 @@ module.exports = {
         directory: '../../../../appcache/',
         // TODO adjust to your needs
         FALLBACK: {
-          '/home': '/',
+          '/sample-page': '/',
           '/contact': '/',
         },
       },
@@ -125,7 +123,7 @@ module.exports = {
       // TODO adjust to your needs
       cacheMaps: [
         {
-          match: /(\/home|\/contact)\/?$/,
+          match: /(\/sample-page|\/contact)\/?$/,
           to: '/',
           requestTypes: ['navigate'],
         },

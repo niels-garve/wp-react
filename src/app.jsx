@@ -27,9 +27,9 @@ import PageStore from './stores/PageStore';
 import SiteActions from './actions/SiteActions';
 import SiteStore from './stores/SiteStore';
 
-// TODO adjust to your needs
 const TEMPLATES = {
-  home: PageLayout,
+  // TODO adjust to your needs
+  // 'sample-page': PageLayout,
 };
 
 class App extends React.Component {
@@ -64,6 +64,9 @@ class App extends React.Component {
       return <Spinner layoutModifier="app" />;
     }
 
+    // redirect to first page (this.props.Pages.pages are sorted by menu_order)
+    const redirectSlug = this.props.Pages.pages[0].slug;
+
     return (
       <div>
         <Router>
@@ -75,7 +78,7 @@ class App extends React.Component {
                 const params = queryString.parse(props.location.search);
 
                 if (params.preview !== 'true') {
-                  return <Redirect exact from="/" to="/home" />;
+                  return <Redirect exact from="/" to={`/${redirectSlug}`} />;
                 }
 
                 const postID = parseInt(params.p, 10);
@@ -87,8 +90,7 @@ class App extends React.Component {
                     case 'headers':
                     case 'sidebars':
                     case 'footers':
-                      // these post types are all integrated into "home"
-                      return <PageLayout slug="home" />;
+                      return <PageLayout slug={redirectSlug} />;
                     default:
                       return <PostLayout id={postID} />;
                   }
@@ -101,7 +103,7 @@ class App extends React.Component {
                 }
 
                 // fallback
-                return <Redirect exact from="/" to="/home" />;
+                return <Redirect exact from="/" to={`/${redirectSlug}`} />;
               }}
             />
 
@@ -109,7 +111,7 @@ class App extends React.Component {
 
             <Route
               exact
-              path="/archive/:id/:slug?"
+              path="/archives/:id/:slug?"
               render={(props) => {
                 const id = parseInt(props.match.params.id, 10);
 
@@ -117,8 +119,7 @@ class App extends React.Component {
                   case 'headers':
                   case 'sidebars':
                   case 'footers':
-                    // these post types are all integrated into "home"
-                    return <PageLayout slug="home" />;
+                    return <PageLayout slug={redirectSlug} />;
                   default:
                     return <PostLayout id={id} />;
                 }

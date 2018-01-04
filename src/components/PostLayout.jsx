@@ -56,7 +56,11 @@ class PostLayout extends React.Component {
           <meta property="og:url" content={post.yoast_meta.yoast_wpseo_canonical} />
         </Helmet>
         }
-        <Header id={post.acf.header.ID} />
+        {post.acf.header ?
+          <Header id={post.acf.header.ID} />
+          :
+          <Header />
+        }
         <main className="l-container l-main">
           <article className="l-main__content">
             <section className="post">
@@ -68,7 +72,9 @@ class PostLayout extends React.Component {
             </section>
           </article>
         </main>
+        {post.acf.footer &&
         <Footer id={post.acf.footer.ID} />
+        }
       </div>
     );
   }

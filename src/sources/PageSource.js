@@ -2,7 +2,10 @@ import wp from './wp';
 
 class PageSource {
   static fetch() {
-    return wp.pages();
+    return wp
+      .pages()
+      .param('orderby', 'menu_order')
+      .param('order', 'asc');
   }
 
   static fetchRevisions(pageID) {

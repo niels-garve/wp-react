@@ -1,18 +1,16 @@
 {
   "name": "wp-react",
-  "version": "2.0.2",
+  "version": "1.0.0",
   "description": "Your website based on a state-of-the-art ReactJS frontend",
   "main": "src/app.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run clean && webpack-dev-server --inline --progress --config webpack.dev.js",
+    "dev": "npm run clean && webpack-dev-server --inline --progress --config webpack.dev.js",
     "build": "npm run clean && webpack -p --progress --config webpack.production.js",
-    "clean": "rimraf ./build/* && rimraf ../../../sw.js && rimraf ../../../appcache",
-    "chrome": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --user-data-dir=/Users/nielsgarve/Library/Application\\ Support/Google/Chrome/Profile--dev --unsafely-treat-insecure-origin-as-secure=http://wp-react.test:8888",
-    "canary": "/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary --user-data-dir=/Users/nielsgarve/Library/Application\\ Support/Google/Chrome\\ Canary/Profile--dev --unsafely-treat-insecure-origin-as-secure=http://wp-react.test:8888"
+    "clean": "rimraf ./wp-content/themes/wp-react-theme/build/* && rimraf ./sw.js && rimraf ./appcache"
   },
   "author": "Niels Garve <garve.niels@mailbox.org>",
-  "license": "CC",
+  "license": "MIT",
   "dependencies": {
     "alt": "^0.18.6",
     "alt-container": "^1.1.1",
@@ -20,7 +18,7 @@
     "babel-runtime": "^6.23.0",
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
-    "offline-plugin": "git@github.com:niels-garve/offline-plugin.git#4.8.6-alpha",
+    "offline-plugin": "^4.9.0",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.0",
     "react": "^15.5.4",
