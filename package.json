@@ -1,6 +1,6 @@
 {
   "name": "wp-react",
-  "version": "2.0.2",
+  "version": "1.0.0",
   "description": "Your website based on a state-of-the-art ReactJS frontend",
   "main": "src/app.jsx",
   "scripts": {
