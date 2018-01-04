@@ -36,7 +36,11 @@ const PageLayout = (props) => {
         <meta property="og:url" content={page.yoast_meta.yoast_wpseo_canonical} />
       </Helmet>
       }
-      <Header id={page.acf.header.ID} />
+      {page.acf.header ?
+        <Header id={page.acf.header.ID} />
+        :
+        <Header />
+      }
       {page.acf.sidebar ?
         <main className="l-container l-main">
           <article className="l-main__content">
@@ -51,7 +55,9 @@ const PageLayout = (props) => {
           </article>
         </main>
       }
+      {page.acf.footer &&
       <Footer id={page.acf.footer.ID} />
+      }
     </div>
   );
 };

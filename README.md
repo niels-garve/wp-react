@@ -6,3 +6,11 @@
 
 run `docker-compose up -d && docker-compose logs -f wordpress`
 run `npm run dev`
+
+### Shutdown and cleanup
+
+run
+```
+$ docker-compose down --volumes
+```
+(see [docker docs](https://docs.docker.com/compose/wordpress/#shutdown-and-cleanup))

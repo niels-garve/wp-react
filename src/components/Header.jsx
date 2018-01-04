@@ -20,14 +20,18 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.revisionID === -1) {
-      HeaderActions.fetchHeader.defer(this.props.id);
-    } else {
+    if (this.props.revisionID !== -1) {
       HeaderActions.fetchRevisions.defer(this.props.revisionID);
+    } else if (this.props.id !== -1) {
+      HeaderActions.fetchHeader.defer(this.props.id);
     }
   }
 
   buildHeader() {
+    if (this.props.id === -1 && this.props.revisionID === -1) {
+      return false;
+    }
+
     if (this.props.error !== null) {
       return (
         <DefaultError
@@ -87,7 +91,7 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   revisionID: PropTypes.number.isRequired,
   pages: PropTypes.arrayOf(PropTypes.object).isRequired, // page collection
   title: PropTypes.string.isRequired,
@@ -95,6 +99,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
+  id: -1,
   error: null,
 };
 

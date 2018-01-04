@@ -65,7 +65,7 @@ class App extends React.Component {
     }
 
     // redirect to first page (this.props.Pages.pages are sorted by menu_order)
-    const redirectURL = `/${this.props.Pages.pages[0].slug}`;
+    const redirectSlug = this.props.Pages.pages[0].slug;
 
     return (
       <div>
@@ -78,7 +78,7 @@ class App extends React.Component {
                 const params = queryString.parse(props.location.search);
 
                 if (params.preview !== 'true') {
-                  return <Redirect exact from="/" to={redirectURL} />;
+                  return <Redirect exact from="/" to={`/${redirectSlug}`} />;
                 }
 
                 const postID = parseInt(params.p, 10);
@@ -90,7 +90,7 @@ class App extends React.Component {
                     case 'headers':
                     case 'sidebars':
                     case 'footers':
-                      return <PageLayout slug={redirectURL} />;
+                      return <PageLayout slug={redirectSlug} />;
                     default:
                       return <PostLayout id={postID} />;
                   }
@@ -103,7 +103,7 @@ class App extends React.Component {
                 }
 
                 // fallback
-                return <Redirect exact from="/" to={redirectURL} />;
+                return <Redirect exact from="/" to={`/${redirectSlug}`} />;
               }}
             />
 
@@ -119,7 +119,7 @@ class App extends React.Component {
                   case 'headers':
                   case 'sidebars':
                   case 'footers':
-                    return <PageLayout slug={redirectURL} />;
+                    return <PageLayout slug={redirectSlug} />;
                   default:
                     return <PostLayout id={id} />;
                 }

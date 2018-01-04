@@ -379,7 +379,6 @@ add_filter( 'rest_prepare_revision', 'ng_rest_prepare_revisions', 10, 2 );
  */
 function ng_mce_buttons( $buttons ) {
 	$remove_buttons = array(
-		'blockquote',
 		'alignleft',
 		'aligncenter',
 		'alignright',

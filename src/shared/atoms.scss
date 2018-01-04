@@ -58,9 +58,26 @@ p {
 
 ul,
 dl,
+blockquote,
 p {
   margin-bottom: 1.3em;
   margin-top: 1rem; // different font sizes, same margin-top
+}
+
+blockquote {
+  border-left: .25rem solid #eceeef;
+  font-size: 1.25rem;
+  margin-left: 0;
+  margin-right: 0;
+  padding: .5rem 1rem;
+
+  p {
+    margin: 0;
+  }
+
+  article & {
+    max-width: $tracking;
+  }
 }
 
 small,
