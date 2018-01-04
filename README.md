@@ -67,3 +67,7 @@ The `wp-react-theme` activates new WordPress menus which allow you to add Header
 I'm currently working on further docs and setup improvements. Anyway, I will be glad if you get in touch with me!
 
 Also, feel free to submit issues if this installation guide needs improvement. I will gladly collect these issues in a troubleshooting section.
+
+### License
+
+MIT
