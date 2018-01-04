@@ -14,6 +14,8 @@ services:
     environment:
       DB_NAME: wordpress
       DB_PASS: root
+      PERMALINKS: archives/%post_id%/%postname%/
+      THEMES: null
       PLUGINS: >-
         [yoast-to-rest-api]https://github.com/niels-garve/yoast-to-rest-api/archive/1.4.1.zip,
         wp-optimize,

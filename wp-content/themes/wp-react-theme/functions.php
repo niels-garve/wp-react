@@ -642,14 +642,13 @@ if ( function_exists( "register_field_group" ) ) {
 				'name'         => 'header',
 				'type'         => 'post_object',
 				'instructions' => 'Hier kannst du einen Header für Deine Seite wählen. Neue Header verwaltest du im Menü "Header".',
-				'required'     => 1,
 				'post_type'    => array(
 					0 => 'headers',
 				),
 				'taxonomy'     => array(
 					0 => 'all',
 				),
-				'allow_null'   => 0,
+				'allow_null'   => 1,
 				'multiple'     => 0,
 			),
 			array(
@@ -673,14 +672,13 @@ if ( function_exists( "register_field_group" ) ) {
 				'name'         => 'footer',
 				'type'         => 'post_object',
 				'instructions' => 'Hier kannst du einen Footer für Deine Seite wählen. Neue Footer verwaltest du im Menü "Footer".',
-				'required'     => 1,
 				'post_type'    => array(
 					0 => 'footers',
 				),
 				'taxonomy'     => array(
 					0 => 'all',
 				),
-				'allow_null'   => 0,
+				'allow_null'   => 1,
 				'multiple'     => 0,
 			),
 		),
@@ -712,14 +710,13 @@ if ( function_exists( "register_field_group" ) ) {
 				'name'         => 'header',
 				'type'         => 'post_object',
 				'instructions' => 'Hier kannst du einen Header für die Detailansicht Deines Posts wählen. Neue Header verwaltest du im Menü "Header".',
-				'required'     => 1,
 				'post_type'    => array(
 					0 => 'headers',
 				),
 				'taxonomy'     => array(
 					0 => 'all',
 				),
-				'allow_null'   => 0,
+				'allow_null'   => 1,
 				'multiple'     => 0,
 			),
 			array(
@@ -743,14 +740,13 @@ if ( function_exists( "register_field_group" ) ) {
 				'name'         => 'footer',
 				'type'         => 'post_object',
 				'instructions' => 'Hier kannst du einen Footer für die Detailansicht Deines Posts wählen. Neue Footer verwaltest du im Menü "Footer".',
-				'required'     => 1,
 				'post_type'    => array(
 					0 => 'footers',
 				),
 				'taxonomy'     => array(
 					0 => 'all',
 				),
-				'allow_null'   => 0,
+				'allow_null'   => 1,
 				'multiple'     => 0,
 			),
 		),

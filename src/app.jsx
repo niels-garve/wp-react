@@ -111,7 +111,7 @@ class App extends React.Component {
 
             <Route
               exact
-              path="/archive/:id/:slug?"
+              path="/archives/:id/:slug?"
               render={(props) => {
                 const id = parseInt(props.match.params.id, 10);
 
