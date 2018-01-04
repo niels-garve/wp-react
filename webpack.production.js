@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'wp-content/themes/wp-react-theme/build'),
     filename: '[name].[hash].js',
-    // TODO adjust to your needs, use CDN like so: 'https://xxx.cloudfront.net/wp-content/themes/wp-react-theme/build/'
+    // TODO use CDN like so: 'https://xxx.cloudfront.net/wp-content/themes/wp-react-theme/build/'
     publicPath: '/wp-content/themes/wp-react-theme/build/'
   },
   resolve: {
@@ -75,7 +75,6 @@ module.exports = {
     //   name: 'name',
     //   short_name: 'short_name',
     //   description: 'description',
-    //   start_url: '/home',
     //   background_color: '#f9f6f6',
     //   theme_color: '#5a3a3b',
     //   icons: [
@@ -100,7 +99,7 @@ module.exports = {
         directory: '../../../../appcache/',
         // TODO adjust to your needs
         FALLBACK: {
-          '/home': '/',
+          '/sample-page': '/',
           '/contact': '/',
         },
       },
@@ -108,7 +107,7 @@ module.exports = {
       // TODO adjust to your needs
       cacheMaps: [
         {
-          match: /(\/home|\/contact)\/?$/,
+          match: /(\/sample-page|\/contact)\/?$/,
           to: '/',
           requestTypes: ['navigate'],
         },

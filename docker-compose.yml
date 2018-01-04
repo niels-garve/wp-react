@@ -31,6 +31,7 @@ services:
         advanced-custom-fields,
         acf-to-rest-api,
         acf-content-analysis-for-yoast-seo
+      ENVIRONMENT: development
   db:
     image: mysql:5.7
     volumes:
@@ -43,9 +44,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - 22222:80
-  web:
-    environment:
-      - ENVIRONMENT=development
 
 volumes:
   data:

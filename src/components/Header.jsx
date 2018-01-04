@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
 
 import HeaderActions from '../actions/HeaderActions';
@@ -54,10 +53,6 @@ class Header extends React.Component {
   }
 
   render() {
-    let sortedPages = this.props.pages;
-
-    sortedPages = _.sortBy(sortedPages, page => page.menu_order);
-
     return (
       <header className="header">
         <div className="header__container l-container">
@@ -75,7 +70,7 @@ class Header extends React.Component {
           </div>
           <nav className={`header__menu${this.state.openMenu ? ' is-expanded' : ''}`}>
             <ul className="header__menu-items">
-              {sortedPages.map(page => (
+              {this.props.pages.map(page => (
                 <li className="header__menu-item" key={page.id}>
                   <NavLink className="header__menu-link" exact to={`/${page.slug}`}>{page.title.rendered}</NavLink>
                 </li>
