@@ -2,9 +2,9 @@
 
 # `wp-react` - More than a blog
 
-WordPress React (or `wp-react`) is a basic setup for WordPress theme development based on **ReactJS**. It is a toolkit that helps you to develop well performing and state-of-the-art websites - even more than blogs.
+WordPress React (or `wp-react`) is a basic setup for WordPress development with **ReactJS**. It is a toolkit that helps you to develop well performing and state-of-the-art websites - even more than blogs.
 
-If you follow the steps in the [installation guide](#installation) a WordPress instance will run in a docker container. Furthermore, a webpack development environment supports you with the React app development (including hot module reloading ;) ).
+Follow the steps in the [installation guide](#installation) and a WordPress will run in a docker container. Furthermore, a webpack development environment will provide you with all you need to develop a React app: hot module reloading, linting (Airbnb), Service Worker generation, etc.
 
 ## Prerequisites
 
