@@ -1,4 +1,5 @@
-![WordPress React logo](logo.png)
+![WordPress React logo](logo.jpg)
+
 # WordPress React (`wp-react`) - More than a foodblog
 
 ## Development
