@@ -18,6 +18,7 @@ module.exports = {
   },
   entry: {
     bundle: './src--redux/',
+    editor: './src--redux/editor.js',
   },
   output: {
     path: path.join(__dirname, 'wp-content/themes/wp-react-theme/build'),

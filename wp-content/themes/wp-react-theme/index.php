@@ -35,7 +35,7 @@
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js" async="async"></script>
 	<noscript>
-		<link rel="stylesheet" href="<?php echo get_asset_by_name_and_extension( 'bundle', 'css' ) ?>">
+		<link rel="stylesheet" href="<?php echo get_asset_by_name_and_extension( 'editor', 'css' ) ?>">
 	</noscript>
 	<?php wp_head(); ?>
 </head>

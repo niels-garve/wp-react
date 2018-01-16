@@ -10,6 +10,12 @@
       {
         "allowSamePrecedence": true
       }
+    ],
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowTaggedTemplates": true
+      }
     ]
   }
 }

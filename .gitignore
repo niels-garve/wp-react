@@ -9,3 +9,6 @@ appcache
 
 ## OSX
 .DS_Store
+
+## docker
+data

@@ -1,0 +1,18 @@
+// colors
+$black: #000;
+$white: #fff;
+$text-color: lighten($black, 10%);
+$background: lighten($white, 5%);
+$brand-color: #483d8b;
+$link-color: #c71585;
+$link-visited: #8b008b;
+$error-background: #f08080;
+
+// layout
+$gutter: 1rem;
+$font-size: 15px;
+$font-size-readable: 17px;
+$font-family-readable: Georgia, serif;
+$line-height-readable: 1.7;
+$content-width: 40rem;
+$tracking: 39rem;

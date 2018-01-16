@@ -319,7 +319,7 @@ add_filter( 'embed_oembed_html', 'ng_embed_oembed_html', 10, 2 );
  */
 function ng_enqueue_scripts() {
 	$app_js  = get_asset_by_name_and_extension( 'bundle', 'js' );
-	$app_css = get_asset_by_name_and_extension( 'bundle', 'css' );
+	$app_css = get_asset_by_name_and_extension( 'editor', 'css' );
 
 	wp_enqueue_script( 'app', "{$app_js}#async", array(), null );
 
