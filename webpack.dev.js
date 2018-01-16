@@ -17,8 +17,7 @@ module.exports = {
     port: 3000,
   },
   entry: {
-    bundle: './src/app.jsx',
-    editor: './src/editor.js',
+    bundle: './src--redux/',
   },
   output: {
     path: path.join(__dirname, 'wp-content/themes/wp-react-theme/build'),
@@ -100,39 +99,40 @@ module.exports = {
     //     },
     //   ],
     // }),
-    new OfflinePlugin({
-      externals: [
-        '/',
-        'https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js',
-      ],
-      ServiceWorker: {
-        entry: './sw-handler.js',
-        publicPath: '/sw.js',
-        output: '../../../../sw.js',
-      },
-      AppCache: {
-        publicPath: '/appcache/',
-        directory: '../../../../appcache/',
-        // TODO adjust to your needs
-        FALLBACK: {
-          '/sample-page': '/',
-          '/contact': '/',
-        },
-      },
-      autoUpdate: true,
-      // TODO adjust to your needs
-      cacheMaps: [
-        {
-          match: /(\/sample-page|\/contact)\/?$/,
-          to: '/',
-          requestTypes: ['navigate'],
-        },
-      ],
-    }),
-    new WriteFilePlugin({
-      // write only Service Worker and App Cache files
-      test: /(sw\.js|manifest\.appcache|manifest\.html)$/,
-      useHashIndex: false
-    }),
+    // TODO Uncomment and adjust to your needs
+    // new OfflinePlugin({
+    //   externals: [
+    //     '/',
+    //     'https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js',
+    //   ],
+    //   ServiceWorker: {
+    //     entry: './sw-handler.js',
+    //     publicPath: '/sw.js',
+    //     output: '../../../../sw.js',
+    //   },
+    //   AppCache: {
+    //     publicPath: '/appcache/',
+    //     directory: '../../../../appcache/',
+    //     // TODO adjust to your needs
+    //     FALLBACK: {
+    //       '/sample-page': '/',
+    //       '/contact': '/',
+    //     },
+    //   },
+    //   autoUpdate: true,
+    //   // TODO adjust to your needs
+    //   cacheMaps: [
+    //     {
+    //       match: /(\/sample-page|\/contact)\/?$/,
+    //       to: '/',
+    //       requestTypes: ['navigate'],
+    //     },
+    //   ],
+    // }),
+    // new WriteFilePlugin({
+    //   // write only Service Worker and App Cache files
+    //   test: /(sw\.js|manifest\.appcache|manifest\.html)$/,
+    //   useHashIndex: false
+    // }),
   ],
 };
