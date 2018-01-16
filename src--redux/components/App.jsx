@@ -40,7 +40,7 @@ class App extends React.Component {
     return (
       <div>
         <Jumbotron>
-          <h1>WordPress React rewritten in Redux and styled components</h1>
+          <h1>WordPress React rewritten in Redux and Styled Components</h1>
           <h3>Pages:</h3>
           <ul>
             {this.props.pages.map(page => <li key={page.id}>{page.slug}</li>)}
