@@ -38,12 +38,12 @@ $ npm install
 
 Start the webpack dev server to serve the React app assets (at `http://localhost:3000`) by running:
 ```
-npm run dev
+$ npm run dev
 ```
 
 Compose the docker container to serve WordPress (at `http://localhost:8080`). Type:
 ```
-docker-compose up
+$ docker-compose up --file docker-compose.dev.yml
 ```
 
 Now, open a browser and navigate to `http://localhost:8080`. You will see a WordPress site that still comes dressed in the style of the default theme.
@@ -83,7 +83,7 @@ removes the containers and default network, but preserves your WordPress databas
 
 The command
 ```
-docker-compose down --volumes
+$ docker-compose down --volumes
 ```
 removes the containers, default network, and the WordPress database. (see [docker docs](https://docs.docker.com/compose/wordpress/#shutdown-and-cleanup))
 

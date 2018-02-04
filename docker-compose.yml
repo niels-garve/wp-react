@@ -3,9 +3,11 @@ services:
   wordpress:
     image: visiblevc/wordpress:latest
     ports:
-      - 8080:80
+      - 80:80
       - 443:443
+    restart: always
     volumes:
+      - ./letsencrypt:/etc/letsencrypt
       - ./data:/data
       - ./wp-content/themes/wp-react-theme:/app/wp-content/themes/wp-react-theme
       - ./wp-content/w3tc-config:/app/wp-content/w3tc-config
@@ -13,7 +15,8 @@ services:
       - ./sw.js:/app/sw.js
       - ./appcache:/app/appcache
     environment:
-      DB_PASS: root
+      SERVER_NAME: mysite.com
+      DB_PASS: ${SECURE_PASSWORD}
       PERMALINKS: archives/%post_id%/%postname%/
       PLUGINS: >-
         [yoast-to-rest-api]https://github.com/niels-garve/yoast-to-rest-api/archive/1.4.1.zip,
@@ -32,19 +35,13 @@ services:
         advanced-custom-fields,
         acf-to-rest-api,
         acf-content-analysis-for-yoast-seo
-      ENVIRONMENT: development
   db:
+    restart: always
     image: mysql:5.7
     volumes:
       - data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - 22222:80
+      MYSQL_ROOT_PASSWORD: ${SECURE_PASSWORD}
 
 volumes:
   data:

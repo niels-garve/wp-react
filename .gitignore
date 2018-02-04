@@ -12,3 +12,6 @@ appcache
 
 ## WordPress.gitignore
 wp-content/uploads/
+
+## Docker
+.env
