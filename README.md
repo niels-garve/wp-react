@@ -43,7 +43,7 @@ $ npm run dev
 
 Compose the docker container to serve WordPress (at `http://localhost:8080`). Type:
 ```
-$ docker-compose up --file docker-compose.dev.yml
+$ docker-compose -f docker-compose.dev.yml up
 ```
 
 Now, open a browser and navigate to `http://localhost:8080`. You will see a WordPress site that still comes dressed in the style of the default theme.
