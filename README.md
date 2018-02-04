@@ -36,14 +36,14 @@ $ cd wp-react/
 $ npm install
 ```
 
-Compose the docker container to serve WordPress (at `http://localhost:8080`). Type:
-```
-docker-compose up -d && docker-compose logs -f wordpress
-```
-
 Start the webpack dev server to serve the React app assets (at `http://localhost:3000`) by running:
 ```
 npm run dev
+```
+
+Compose the docker container to serve WordPress (at `http://localhost:8080`). Type:
+```
+docker-compose up
 ```
 
 Now, open a browser and navigate to `http://localhost:8080`. You will see a WordPress site that still comes dressed in the style of the default theme.
@@ -58,6 +58,20 @@ Activate the `wp-react-theme` through the 'Appearance' menu in WordPress.
 ![WordPress React logo](docs/step-3.png)
 
 Having done this, `http://localhost:8080` now shows the (very) basic `wp-react-theme`. Feel free to inspect XHR calls in the inspector of your choice - or the HTML structure.
+
+### DB Handling
+
+Restore the database with /data/database.sql
+```
+$ docker exec $(docker ps -lq) /bin/bash -c "wp db import /data/database.sql --allow-root"
+```
+
+Dump the database to /data/database_bk.sql
+```
+$ docker exec $(docker ps -lq) /bin/bash -c "wp db export /data/database_bk.sql --allow-root"
+```
+
+(see [Setup a local WordPress development environment with Docker](https://visible.vc/engineering/docker-environment-for-wordpress/))
 
 ### Shutdown and cleanup
 

@@ -7,16 +7,13 @@ services:
       - 443:443
     volumes:
       - ./data:/data
-      - ./wp-content/themes/wp-react-theme:/app/wp-content/themes/wp-react-theme
+      - ./wp-content:/app/wp-content
       - ./sw.js:/app/sw.js
-      - ./appcache/manifest.appcache:/app/appcache/manifest.appcache
-      - ./appcache/manifest.html:/app/appcache/manifest.html
+      - ./appcache:/app/appcache
     environment:
       DB_NAME: wordpress
       DB_PASS: root
       PERMALINKS: archives/%post_id%/%postname%/
-      THEMES: >-
-        [local]wp-react-theme
       PLUGINS: >-
         [yoast-to-rest-api]https://github.com/niels-garve/yoast-to-rest-api/archive/1.4.1.zip,
         wp-optimize,

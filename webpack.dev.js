@@ -23,7 +23,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'wp-content/themes/wp-react-theme/build'),
     filename: '[name].js',
-    publicPath: '/wp-content/themes/wp-react-theme/build/',
+    publicPath: 'http://localhost:3000/wp-content/themes/wp-react-theme/build/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
