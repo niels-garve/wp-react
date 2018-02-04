@@ -7,7 +7,9 @@ services:
       - 443:443
     volumes:
       - ./data:/data
-      - ./wp-content:/app/wp-content
+      - ./wp-content/themes/wp-react-theme:/app/wp-content/themes/wp-react-theme
+      - ./wp-content/w3tc-config:/app/wp-content/w3tc-config
+      - ./wp-content/uploads:/app/wp-content/uploads
       - ./sw.js:/app/sw.js
       - ./appcache:/app/appcache
     environment:
