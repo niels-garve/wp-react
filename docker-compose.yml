@@ -16,7 +16,7 @@ services:
       - ./appcache:/app/appcache
     environment:
       SERVER_NAME: mysite.com
-      DB_PASS: ${SECURE_PASSWORD}
+      DB_PASS: ${DB_PASS}
       PERMALINKS: archives/%post_id%/%postname%/
       PLUGINS: >-
         [yoast-to-rest-api]https://github.com/niels-garve/yoast-to-rest-api/archive/1.4.1.zip,
@@ -41,7 +41,7 @@ services:
     volumes:
       - data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${SECURE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
 
 volumes:
   data:
