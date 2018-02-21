@@ -7,13 +7,12 @@ services:
       - 443:443
     volumes:
       - ./data:/data
-      - ./wp-content/themes/wp-react-theme:/app/wp-content/themes/wp-react-theme
-      - ./wp-content/w3tc-config:/app/wp-content/w3tc-config
-      - ./wp-content/uploads:/app/wp-content/uploads
-      - ./sw.js:/app/sw.js
-      - ./appcache:/app/appcache
+      - ./wordpress:/app
     environment:
-      DB_PASS: root
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
       PERMALINKS: archives/%post_id%/%postname%/
       PLUGINS: >-
         [yoast-to-rest-api]https://github.com/niels-garve/yoast-to-rest-api/archive/1.4.1.zip,
@@ -38,11 +37,11 @@ services:
     volumes:
       - data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
     ports:
       - 22222:80
 

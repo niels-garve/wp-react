@@ -21,7 +21,7 @@ module.exports = {
     editor: './src/editor.js',
   },
   output: {
-    path: path.join(__dirname, 'wp-content/themes/wp-react-theme/build'),
+    path: path.join(__dirname, 'wordpress/wp-content/themes/wp-react-theme/build'),
     filename: '[name].js',
     publicPath: 'http://localhost:3000/wp-content/themes/wp-react-theme/build/',
   },

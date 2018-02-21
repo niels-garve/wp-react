@@ -12,7 +12,7 @@ module.exports = {
     editor: './src/editor.js',
   },
   output: {
-    path: path.join(__dirname, 'wp-content/themes/wp-react-theme/build'),
+    path: path.join(__dirname, 'wordpress/wp-content/themes/wp-react-theme/build'),
     filename: '[name].[hash].js',
     // TODO use CDN like so: 'https://xxx.cloudfront.net/wp-content/themes/wp-react-theme/build/'
     publicPath: '/wp-content/themes/wp-react-theme/build/'
