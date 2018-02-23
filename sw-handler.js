@@ -1,5 +1,5 @@
 // TODO rename CACHE!
-var CACHE = 'com.nielsgarve.wp-react.wp-json-cache';
+var CACHE = 'com.nielsgarve.quintessenz.art.wp-json-cache';
 var FALLBACK = '{"code":"rest_post_invalid_id","message":"Invalid post ID.","data":{"status":404}}';
 
 /**
