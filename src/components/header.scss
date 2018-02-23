@@ -3,7 +3,7 @@
 
 .header {
   background: $brand-background;
-  color: $white;
+  color: $brand-color;
 
   @media (min-width: 768px) {
     margin: 0 0 3em;
@@ -24,7 +24,7 @@
 
 .header__brand.header__brand {
   border: 0;
-  color: $white;
+  color: $brand-color;
   display: block;
   float: left;
   font-size: 1.25em;
@@ -108,7 +108,7 @@
 
 .header__menu-link.header__menu-link {
   border: 0;
-  color: $white;
+  color: $brand-color;
   display: block;
   line-height: 1.3em;
   padding: 12px 0;
