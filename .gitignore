@@ -3,15 +3,12 @@
 
 ## webpack
 node_modules
-wp-content/themes/wp-react-theme/build
-sw.js
-appcache
+wordpress/wp-content/themes/wp-react-theme/build
+wordpress/sw.js
+wordpress/appcache
 
 ## OSX
 .DS_Store
-
-## WordPress.gitignore
-wp-content/uploads/
 
 ## Docker
 .env
