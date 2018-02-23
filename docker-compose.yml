@@ -17,6 +17,8 @@ services:
     environment:
       SERVER_NAME: mysite.com
       DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
       PERMALINKS: archives/%post_id%/%postname%/
       PLUGINS: >-
         [yoast-to-rest-api]https://github.com/niels-garve/yoast-to-rest-api/archive/1.4.1.zip,
