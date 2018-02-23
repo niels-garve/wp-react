@@ -2,7 +2,7 @@
 @import '../shared/config';
 
 .header {
-  background: $brand-color;
+  background: $brand-background;
   color: $white;
 
   @media (min-width: 768px) {

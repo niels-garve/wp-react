@@ -21,6 +21,7 @@ class PostSource {
     return wp
       .posts()
       .id(postID)
+      .embed()
       .then(post => (
         Promise.all(post.categories.map(categoryID => wp.categories().id(categoryID)))
           .then((categories) => {

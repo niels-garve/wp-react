@@ -26,25 +26,25 @@ button,
 
 button[type="submit"],
 .button--info {
-  background: $brand-color;
-  border-color: darken($brand-color, 5%);
+  background: $brand-background;
+  border-color: darken($brand-background, 5%);
   color: $white;
 
   &:hover,
   &:focus {
-    background: darken($brand-color, 10%);
-    border-color: darken($brand-color, 15%);
+    background: darken($brand-background, 10%);
+    border-color: darken($brand-background, 15%);
   }
 }
 
 .button--light {
-  background: lighten($brand-color, 35%);
-  border-color: lighten($brand-color, 30%);
+  background: lighten($brand-background, 35%);
+  border-color: lighten($brand-background, 30%);
   color: $black;
 
   &:hover,
   &:focus {
-    background: lighten($brand-color, 25%);
-    border-color: lighten($brand-color, 20%);
+    background: lighten($brand-background, 25%);
+    border-color: lighten($brand-background, 20%);
   }
 }

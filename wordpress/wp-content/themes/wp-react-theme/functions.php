@@ -32,7 +32,7 @@ if ( ! function_exists( 'ng_after_setup_theme' ) ) :
 		// load_theme_textdomain('wp-react-theme', get_template_directory() . '/languages');
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
-		set_post_thumbnail_size( 148, 148, true );
+		set_post_thumbnail_size( 312, 312, true );
 		add_theme_support( 'html5', array( 'gallery', 'caption' ) );
 		/**
 		 * Enable support for the following post formats:
