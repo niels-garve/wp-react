@@ -1,9 +1,8 @@
-import _ from 'lodash';
 import wp from './wp';
 
 class PostSource {
-  static fetch(page) {
-    return wp.categories().slug('allgemein')
+  static fetch(categorySlug, page) {
+    return wp.categories().slug(categorySlug)
       .then((categories) => {
         // .slug() queries will always return as an array
         const category = categories[0];
@@ -25,9 +24,8 @@ class PostSource {
       .then(post => (
         Promise.all(post.categories.map(categoryID => wp.categories().id(categoryID)))
           .then((categories) => {
-            const c = _.map(categories, category => category.slug);
             const p = post;
-            p.categories_slugs = c;
+            p.categories_objects = categories;
             return p;
           })
       ));

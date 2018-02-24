@@ -3,11 +3,16 @@ import alt from '../alt';
 import PostSource from '../sources/PostSource';
 
 class PostActions {
-  fetchPosts(page) {
+
+  constructor(category) {
+    this.category = category || 'uncategorized';
+  }
+
+  fetchPosts(page = 1) {
     return (dispatch) => {
       // we dispatch an event here so we can have `loading` state.
       dispatch(page);
-      PostSource.fetch(page)
+      PostSource.fetch(this.category, page)
         .then((posts) => {
           this.updatePosts(page, posts, posts._paging);
         })
@@ -91,5 +96,7 @@ class PostActions {
     };
   }
 }
+
+export const AbstractPostActions = PostActions;
 
 export default alt.createActions(PostActions);
