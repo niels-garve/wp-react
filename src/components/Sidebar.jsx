@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import AltContainer from 'alt-container';
+
 import Spinner from './Spinner';
 import DefaultError from './DefaultError';
 import SidebarActions from '../actions/SidebarActions';
 import SidebarStore from '../stores/SidebarStore';
 import withSidebarRevisions from './withSidebarRevisions';
+import PostStore from '../stores/PostStore';
+import CategoryNavigation from './CategoryNavigation';
 
 class Sidebar extends React.Component {
 
@@ -43,10 +47,18 @@ class Sidebar extends React.Component {
     );
   }
 
+  /**
+   * If you have a single component and you’re using required propTypes then this is a legitimate
+   * way of rendering the components without getting a warning about invalid propTypes from React
+   * due to cloneWithProps.
+   * @returns {XML}
+   * @see http://alt.js.org/docs/components/altContainer/
+   */
   render() {
     return (
       <aside className="l-main__side-content">
         {this.buildSidebar()}
+        <AltContainer store={PostStore} component={CategoryNavigation} />
       </aside>
     );
   }

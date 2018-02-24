@@ -3,6 +3,7 @@ import _ from 'lodash';
 export default class AbstractPostStore {
   constructor() {
     this.posts = [];
+    this.allPosts = [];
     this.postsRevisions = [];
     this.error = null;
     this.paging = null;
@@ -12,6 +13,10 @@ export default class AbstractPostStore {
     // reset the array while we're fetching new posts so React can
     // be smart and render a spinner for us since the data is empty.
     this.posts[page] = [];
+  }
+
+  handleFetchAllPosts() {
+    this.allPosts = [];
   }
 
   handleFetchPost(postID) {
@@ -58,6 +63,11 @@ export default class AbstractPostStore {
 
     this.posts[page] = posts;
     this.paging = paging;
+    this.error = null;
+  }
+
+  handleUpdateAllPosts(posts) {
+    this.allPosts = posts;
     this.error = null;
   }
 

@@ -1,12 +1,15 @@
 import React from 'react';
+import NavLink from 'react-router-dom/es/NavLink';
 import PropTypes from 'prop-types';
+
 import DefaultError from './DefaultError';
 import PostActions from '../actions/PostActions';
+import Spinner from './Spinner';
 
 class CategoryNavigation extends React.Component {
 
   componentDidMount() {
-    PostActions.fetchPosts.defer();
+    PostActions.fetchAllPosts.defer();
   }
 
   render() {
@@ -19,28 +22,33 @@ class CategoryNavigation extends React.Component {
       );
     }
 
+    if (this.props.allPosts.length === 0) {
+      return <Spinner />;
+    }
+
     return (
-      <ol>
-        <li>
-          <div>Category 1</div>
-          <ul>
-            <li>Sub-category 1</li>
-            <li>Sub-category 2</li>
-          </ul>
-        </li>
-        <li>
-          <div>Category 2</div>
-          <ul>
-            <li>Sub-category 1</li>
-            <li>Sub-category 2</li>
-          </ul>
-        </li>
-      </ol>
+      <ul>
+        {this.props.allPosts.map(category => (
+          <li>
+            <h3>{category.name}</h3>
+            <ul>
+              {category.posts.map(post => (
+                <li>
+                  <NavLink exact to={new URL(post.link).pathname}>
+                    {post.title.rendered}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
     );
   }
 }
 
 CategoryNavigation.propTypes = {
+  allPosts: PropTypes.arrayOf(PropTypes.object).isRequired,
   error: PropTypes.shape({}),
 };
 

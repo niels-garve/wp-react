@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AltContainer from 'alt-container';
 
 import HeaderActions from '../actions/HeaderActions';
 import HeaderStore from '../stores/HeaderStore';
@@ -9,8 +8,6 @@ import Spinner from './Spinner';
 import DefaultError from './DefaultError';
 import RichText from './RichText';
 import withHeaderRevisions from './withHeaderRevisions';
-import PostStore from '../stores/PostStore';
-import CategoryNavigation from './CategoryNavigation';
 
 class Header extends React.Component {
 
@@ -83,9 +80,6 @@ class Header extends React.Component {
                 </li>
               ))}
             </ul>
-            <AltContainer store={PostStore}>
-              <CategoryNavigation />
-            </AltContainer>
           </nav>
           <div className="header__content">
             {this.buildHeader()}

@@ -22,6 +22,20 @@ class PostActions {
     };
   }
 
+  fetchAllPosts() {
+    return (dispatch) => {
+      // we dispatch an event here so we can have `loading` state.
+      dispatch();
+      PostSource.fetchAll()
+        .then((posts) => {
+          this.updateAllPosts(posts);
+        })
+        .catch((error) => {
+          this.postsFailed(error);
+        });
+    };
+  }
+
   fetchPost(postID) {
     return (dispatch) => {
       // we dispatch an event here so we can have `loading` state.
@@ -72,6 +86,15 @@ class PostActions {
       posts,
       paging,
     };
+  }
+
+  /**
+   * can't be static due to altjs
+   * @param posts
+   * @returns {[{}, {}]} post collection
+   */
+  updateAllPosts(posts) {
+    return posts;
   }
 
   /**

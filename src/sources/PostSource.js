@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import wp from './wp';
 
 class PostSource {
@@ -9,11 +10,37 @@ class PostSource {
         return wp
           .posts()
           .categories(category.id)
+          .embed()
           .param('orderby', 'date')
           .param('order', 'desc')
           .perPage(10)
           .page(page);
       });
+  }
+
+  static fetchAll() {
+    return wp.categories().then(categories => (
+      wp.posts()
+        .param('orderby', 'date')
+        .param('order', 'desc')
+        .then(posts => (_(categories)
+            .map((category) => {
+              const categoryPosts =
+                _.filter(posts, post => post.categories.indexOf(category.id) !== -1);
+
+              if (categoryPosts.length === 0) {
+                return false;
+              }
+
+              return {
+                ...category,
+                posts: categoryPosts,
+              };
+            })
+            .compact()
+            .value()
+        ))
+    ));
   }
 
   static fetchPost(postID) {
