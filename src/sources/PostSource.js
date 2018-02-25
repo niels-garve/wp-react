@@ -18,7 +18,7 @@ class PostSource {
       });
   }
 
-  static fetchAll() {
+  static fetchPostsByCategories() {
     return wp.categories().then(categories => (
       wp.posts()
         .param('orderby', 'date')

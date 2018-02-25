@@ -3,7 +3,7 @@ import _ from 'lodash';
 export default class AbstractPostStore {
   constructor() {
     this.posts = [];
-    this.allPosts = [];
+    this.postsByCategories = [];
     this.postsRevisions = [];
     this.error = null;
     this.paging = null;
@@ -15,8 +15,8 @@ export default class AbstractPostStore {
     this.posts[page] = [];
   }
 
-  handleFetchAllPosts() {
-    this.allPosts = [];
+  handleFetchPostsByCategories() {
+    this.postsByCategories = [];
   }
 
   handleFetchPost(postID) {
@@ -66,8 +66,8 @@ export default class AbstractPostStore {
     this.error = null;
   }
 
-  handleUpdateAllPosts(posts) {
-    this.allPosts = posts;
+  handleUpdatePostsByCategories(posts) {
+    this.postsByCategories = posts;
     this.error = null;
   }
 

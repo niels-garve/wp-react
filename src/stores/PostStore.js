@@ -8,12 +8,12 @@ class PostStore extends AbstractPostStore {
 
     this.bindListeners({
       handleFetchPosts: PostActions.fetchPosts,
-      handleFetchAllPosts: PostActions.fetchAllPosts,
+      handleFetchPostsByCategories: PostActions.fetchPostsByCategories,
       handleFetchPost: PostActions.fetchPost,
       handleFetchRevisions: PostActions.fetchRevisions,
       handlePostsFailed: PostActions.postsFailed,
       handleUpdatePosts: PostActions.updatePosts,
-      handleUpdateAllPosts: PostActions.updateAllPosts,
+      handleUpdatePostsByCategories: PostActions.updatePostsByCategories,
       handleUpdatePost: PostActions.updatePost,
       handleUpdateRevisions: PostActions.updateRevisions,
     });

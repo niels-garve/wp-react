@@ -22,13 +22,13 @@ class PostActions {
     };
   }
 
-  fetchAllPosts() {
+  fetchPostsByCategories() {
     return (dispatch) => {
       // we dispatch an event here so we can have `loading` state.
       dispatch();
-      PostSource.fetchAll()
+      PostSource.fetchPostsByCategories()
         .then((posts) => {
-          this.updateAllPosts(posts);
+          this.updatePostsByCategories(posts);
         })
         .catch((error) => {
           this.postsFailed(error);
@@ -93,7 +93,7 @@ class PostActions {
    * @param posts
    * @returns {[{}, {}]} post collection
    */
-  updateAllPosts(posts) {
+  updatePostsByCategories(posts) {
     return posts;
   }
 

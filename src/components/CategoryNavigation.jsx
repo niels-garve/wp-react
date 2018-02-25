@@ -9,7 +9,7 @@ import Spinner from './Spinner';
 class CategoryNavigation extends React.Component {
 
   componentDidMount() {
-    PostActions.fetchAllPosts.defer();
+    PostActions.fetchPostsByCategories.defer();
   }
 
   render() {
@@ -22,13 +22,13 @@ class CategoryNavigation extends React.Component {
       );
     }
 
-    if (this.props.allPosts.length === 0) {
+    if (this.props.postsByCategories.length === 0) {
       return <Spinner />;
     }
 
     return (
       <ul>
-        {this.props.allPosts.map(category => (
+        {this.props.postsByCategories.map(category => (
           <li key={`category-${category.id}`}>
             <h3>{category.name}</h3>
             <ul>
@@ -48,7 +48,7 @@ class CategoryNavigation extends React.Component {
 }
 
 CategoryNavigation.propTypes = {
-  allPosts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  postsByCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
   error: PropTypes.shape({}),
 };
 
