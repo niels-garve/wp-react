@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RichText from './RichText';
-import withPageLayout from './PageLayout';
+import withPageLayout from './withPageLayout';
 
 const Home = props => (
   <div>
