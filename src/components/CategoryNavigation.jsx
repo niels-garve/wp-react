@@ -29,11 +29,11 @@ class CategoryNavigation extends React.Component {
     return (
       <ul>
         {this.props.allPosts.map(category => (
-          <li>
+          <li key={`category-${category.id}`}>
             <h3>{category.name}</h3>
             <ul>
               {category.posts.map(post => (
-                <li>
+                <li key={`category-${category.id}-post-${post.id}`}>
                   <NavLink exact to={new URL(post.link).pathname}>
                     {post.title.rendered}
                   </NavLink>

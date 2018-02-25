@@ -17,7 +17,6 @@ import OfflinePluginRuntime from 'offline-plugin/runtime';
 import styles from './app.scss';
 /* eslint-enable no-unused-vars */
 
-import PageLayout from './components/PageLayout';
 import PostLayout from './components/PostLayout';
 import Spinner from './components/Spinner';
 import DefaultError from './components/DefaultError';
@@ -26,10 +25,12 @@ import PageActions from './actions/PageActions';
 import PageStore from './stores/PageStore';
 import SiteActions from './actions/SiteActions';
 import SiteStore from './stores/SiteStore';
+import Home from './components/Home';
+import DefaultPage from './components/DefaultPage';
 
 const TEMPLATES = {
   // TODO adjust to your needs
-  // 'sample-page': PageLayout,
+  home: Home,
 };
 
 class App extends React.Component {
@@ -46,7 +47,7 @@ class App extends React.Component {
         path={`/${page.slug}`}
         exact
         render={() => {
-          const Component = TEMPLATES[page.slug] || PageLayout;
+          const Component = TEMPLATES[page.slug] || DefaultPage;
           return <Component slug={page.slug} />;
         }}
       />
@@ -90,7 +91,7 @@ class App extends React.Component {
                     case 'headers':
                     case 'sidebars':
                     case 'footers':
-                      return <PageLayout slug={redirectSlug} />;
+                      return <DefaultPage slug={redirectSlug} />;
                     default:
                       return <PostLayout id={postID} />;
                   }
@@ -99,7 +100,7 @@ class App extends React.Component {
                 // page draft preview
                 if (!isNaN(pageID)) {
                   // slug can be an empty string - the page is loaded by pageID (preview mode)
-                  return <PageLayout slug="" />;
+                  return <DefaultPage slug="" />;
                 }
 
                 // fallback
@@ -119,7 +120,7 @@ class App extends React.Component {
                   case 'headers':
                   case 'sidebars':
                   case 'footers':
-                    return <PageLayout slug={redirectSlug} />;
+                    return <DefaultPage slug={redirectSlug} />;
                   default:
                     return <PostLayout id={id} />;
                 }
