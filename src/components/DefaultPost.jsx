@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import RichText from './RichText';
-import withPostLayout from './PostLayout';
+import withPostLayout from './withPostLayout';
 
 const DefaultPost = props => (
   <section>
