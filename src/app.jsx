@@ -17,7 +17,6 @@ import OfflinePluginRuntime from 'offline-plugin/runtime';
 import styles from './app.scss';
 /* eslint-enable no-unused-vars */
 
-import PostLayout from './components/PostLayout';
 import Spinner from './components/Spinner';
 import DefaultError from './components/DefaultError';
 
@@ -27,6 +26,7 @@ import SiteActions from './actions/SiteActions';
 import SiteStore from './stores/SiteStore';
 import Home from './components/Home';
 import DefaultPage from './components/DefaultPage';
+import DefaultPost from './components/DefaultPost';
 
 const TEMPLATES = {
   // TODO adjust to your needs
@@ -93,7 +93,7 @@ class App extends React.Component {
                     case 'footers':
                       return <DefaultPage slug={redirectSlug} />;
                     default:
-                      return <PostLayout id={postID} />;
+                      return <DefaultPost id={postID} />;
                   }
                 }
 
@@ -122,7 +122,7 @@ class App extends React.Component {
                   case 'footers':
                     return <DefaultPage slug={redirectSlug} />;
                   default:
-                    return <PostLayout id={id} />;
+                    return <DefaultPost id={id} />;
                 }
               }}
             />
