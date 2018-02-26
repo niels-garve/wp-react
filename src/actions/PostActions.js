@@ -36,6 +36,20 @@ class PostActions {
     };
   }
 
+  fetchLatestPosts() {
+    return (dispatch) => {
+      // we dispatch an event here so we can have `loading` state.
+      dispatch();
+      PostSource.fetchLatestPosts()
+        .then((posts) => {
+          this.updateLatestPosts(posts);
+        })
+        .catch((error) => {
+          this.postsFailed(error);
+        });
+    };
+  }
+
   fetchPost(postID) {
     return (dispatch) => {
       // we dispatch an event here so we can have `loading` state.
@@ -94,6 +108,15 @@ class PostActions {
    * @returns {[{}, {}]} post collection
    */
   updatePostsByCategories(posts) {
+    return posts;
+  }
+
+  /**
+   * can't be static due to altjs
+   * @param posts
+   * @returns {[{}, {}]} post collection
+   */
+  updateLatestPosts(posts) {
     return posts;
   }
 

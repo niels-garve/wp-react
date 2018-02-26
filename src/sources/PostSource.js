@@ -43,6 +43,16 @@ class PostSource {
     ));
   }
 
+  static fetchLatestPosts() {
+    return wp
+      .posts()
+      .embed()
+      .param('orderby', 'date')
+      .param('order', 'desc')
+      .perPage(10)
+      .page(1);
+  }
+
   static fetchPost(postID) {
     return wp
       .posts()

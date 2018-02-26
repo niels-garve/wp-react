@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import AltContainer from 'alt-container';
 import RichText from './RichText';
 import withPageLayout from './withPageLayout';
+import PostStore from '../stores/PostStore';
+import LatestPosts from './LatestPosts';
 
 const Home = props => (
   <div>
+    <AltContainer store={PostStore} component={LatestPosts} />
     <RichText html={props.page.content.rendered} />
   </div>
 );

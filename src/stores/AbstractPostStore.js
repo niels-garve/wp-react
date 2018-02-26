@@ -5,6 +5,7 @@ export default class AbstractPostStore {
     this.posts = [];
     this.postsByCategories = [];
     this.postsRevisions = [];
+    this.latestPosts = [];
     this.error = null;
     this.paging = null;
   }
@@ -17,6 +18,10 @@ export default class AbstractPostStore {
 
   handleFetchPostsByCategories() {
     this.postsByCategories = [];
+  }
+
+  handleFetchLatestPosts() {
+    this.latestPosts = [];
   }
 
   handleFetchPost(postID) {
@@ -68,6 +73,11 @@ export default class AbstractPostStore {
 
   handleUpdatePostsByCategories(posts) {
     this.postsByCategories = posts;
+    this.error = null;
+  }
+
+  handleUpdateLatestPosts(posts) {
+    this.latestPosts = posts;
     this.error = null;
   }
 

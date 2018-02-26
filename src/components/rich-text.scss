@@ -9,12 +9,6 @@
     display: block;
   }
 
-  img {
-    display: block;
-    height: auto;
-    max-width: 100%;
-  }
-
   .alignleft {
     @media (min-width: 480px) {
       float: left;
