@@ -2,8 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
-import AltContainer from 'alt-container';
-import PageStore from '../stores/PageStore';
 import PageActions from '../actions/PageActions';
 
 function withPageRevisions(Page) {
@@ -51,12 +49,10 @@ function withPageRevisions(Page) {
 
     render() {
       return (
-        <AltContainer store={PageStore}>
-          <Page
-            {...this.state}
-            {...this.props}
-          />
-        </AltContainer>
+        <Page
+          {...this.state}
+          {...this.props}
+        />
       );
     }
   }
