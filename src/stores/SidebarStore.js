@@ -8,15 +8,7 @@ class SidebarStore {
     this.sidebarsRevisions = [];
     this.error = null;
 
-    this.bindListeners({
-      handleFetchSidebars: SidebarActions.fetchSidebars,
-      handleFetchSidebar: SidebarActions.fetchSidebar,
-      handleFetchRevisions: SidebarActions.fetchRevisions,
-      handleSidebarsFailed: SidebarActions.sidebarsFailed,
-      handleUpdateSidebars: SidebarActions.updateSidebars,
-      handleUpdateSidebar: SidebarActions.updateSidebar,
-      handleUpdateRevisions: SidebarActions.updateRevisions,
-    });
+    this.bindActions(SidebarActions);
 
     this.exportPublicMethods({
       getSidebarRevisions: this.getSidebarRevisions,
@@ -25,13 +17,13 @@ class SidebarStore {
     });
   }
 
-  handleFetchSidebars() {
+  onFetchSidebars() {
     // reset the array while we're fetching new sidebars so React can
     // be smart and render a spinner for us since the data is empty.
     this.sidebars = [];
   }
 
-  handleFetchSidebar(sidebarID) {
+  onFetchSidebar(sidebarID) {
     const index = _.findIndex(this.sidebars, obj => obj.id === sidebarID);
 
     if (index === -1) {
@@ -44,7 +36,7 @@ class SidebarStore {
     }
   }
 
-  handleFetchRevisions(sidebarID) {
+  onFetchRevisions(sidebarID) {
     const index = _.findIndex(this.sidebarsRevisions, obj => obj.id === sidebarID);
 
     if (index === -1) {
@@ -57,16 +49,16 @@ class SidebarStore {
     }
   }
 
-  handleSidebarsFailed(error) {
+  onSidebarsFailed(error) {
     this.error = error;
   }
 
-  handleUpdateSidebars(sidebars) {
+  onUpdateSidebars(sidebars) {
     this.sidebars = sidebars;
     this.error = null;
   }
 
-  handleUpdateSidebar(sidebar) {
+  onUpdateSidebar(sidebar) {
     this.sidebars = _.map(this.sidebars, (obj) => {
       if (obj.id === sidebar.id) {
         return sidebar;
@@ -78,7 +70,7 @@ class SidebarStore {
     this.error = null;
   }
 
-  handleUpdateRevisions(data) {
+  onUpdateRevisions(data) {
     const {
       sidebarID,
       revisions,

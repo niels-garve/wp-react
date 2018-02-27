@@ -8,13 +8,7 @@ class PageStore {
     this.pagesRevisions = [];
     this.error = null;
 
-    this.bindListeners({
-      handleFetchPages: PageActions.fetchPages,
-      handleFetchRevisions: PageActions.fetchRevisions,
-      handlePagesFailed: PageActions.pagesFailed,
-      handleUpdatePages: PageActions.updatePages,
-      handleUpdateRevisions: PageActions.updateRevisions,
-    });
+    this.bindActions(PageActions);
 
     this.exportPublicMethods({
       getPageBySlug: this.getPageBySlug,
@@ -23,13 +17,13 @@ class PageStore {
     });
   }
 
-  handleFetchPages() {
+  onFetchPages() {
     // reset the array while we're fetching new pages so React can
     // be smart and render a spinner for us since the data is empty.
     this.pages = [];
   }
 
-  handleFetchRevisions(pageID) {
+  onFetchRevisions(pageID) {
     const index = _.findIndex(this.pagesRevisions, obj => obj.id === pageID);
 
     if (index === -1) {
@@ -42,16 +36,16 @@ class PageStore {
     }
   }
 
-  handlePagesFailed(error) {
+  onPagesFailed(error) {
     this.error = error;
   }
 
-  handleUpdatePages(pages) {
+  onUpdatePages(pages) {
     this.pages = pages;
     this.error = null;
   }
 
-  handleUpdateRevisions(data) {
+  onUpdateRevisions(data) {
     const {
       pageID,
       revisions,

@@ -8,15 +8,7 @@ class HeaderStore {
     this.headersRevisions = [];
     this.error = null;
 
-    this.bindListeners({
-      handleFetchHeaders: HeaderActions.fetchHeaders,
-      handleFetchHeader: HeaderActions.fetchHeader,
-      handleFetchRevisions: HeaderActions.fetchRevisions,
-      handleHeadersFailed: HeaderActions.headersFailed,
-      handleUpdateHeaders: HeaderActions.updateHeaders,
-      handleUpdateHeader: HeaderActions.updateHeader,
-      handleUpdateRevisions: HeaderActions.updateRevisions,
-    });
+    this.bindActions(HeaderActions);
 
     this.exportPublicMethods({
       getHeaderRevisions: this.getHeaderRevisions,
@@ -25,13 +17,13 @@ class HeaderStore {
     });
   }
 
-  handleFetchHeaders() {
+  onFetchHeaders() {
     // reset the array while we're fetching new headers so React can
     // be smart and render a spinner for us since the data is empty.
     this.headers = [];
   }
 
-  handleFetchHeader(headerID) {
+  onFetchHeader(headerID) {
     const index = _.findIndex(this.headers, obj => obj.id === headerID);
 
     if (index === -1) {
@@ -44,7 +36,7 @@ class HeaderStore {
     }
   }
 
-  handleFetchRevisions(headerID) {
+  onFetchRevisions(headerID) {
     const index = _.findIndex(this.headersRevisions, obj => obj.id === headerID);
 
     if (index === -1) {
@@ -57,16 +49,16 @@ class HeaderStore {
     }
   }
 
-  handleHeadersFailed(error) {
+  onHeadersFailed(error) {
     this.error = error;
   }
 
-  handleUpdateHeaders(headers) {
+  onUpdateHeaders(headers) {
     this.headers = headers;
     this.error = null;
   }
 
-  handleUpdateHeader(header) {
+  onUpdateHeader(header) {
     this.headers = _.map(this.headers, (obj) => {
       if (obj.id === header.id) {
         return header;
@@ -78,7 +70,7 @@ class HeaderStore {
     this.error = null;
   }
 
-  handleUpdateRevisions(data) {
+  onUpdateRevisions(data) {
     const {
       headerID,
       revisions,

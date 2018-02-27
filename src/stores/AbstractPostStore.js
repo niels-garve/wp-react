@@ -10,21 +10,21 @@ export default class AbstractPostStore {
     this.paging = null;
   }
 
-  handleFetchPosts(page) {
+  onFetchPosts(page) {
     // reset the array while we're fetching new posts so React can
     // be smart and render a spinner for us since the data is empty.
     this.posts[page] = [];
   }
 
-  handleFetchPostsByCategories() {
+  onFetchPostsByCategories() {
     this.postsByCategories = [];
   }
 
-  handleFetchLatestPosts() {
+  onFetchLatestPosts() {
     this.latestPosts = [];
   }
 
-  handleFetchPost(postID) {
+  onFetchPost(postID) {
     const postsLength = this.posts.length;
 
     for (let page = 0; page < postsLength; page += 1) {
@@ -42,7 +42,7 @@ export default class AbstractPostStore {
     }]);
   }
 
-  handleFetchRevisions(postID) {
+  onFetchRevisions(postID) {
     const index = _.findIndex(this.postsRevisions, obj => obj.id === postID);
 
     if (index === -1) {
@@ -55,11 +55,11 @@ export default class AbstractPostStore {
     }
   }
 
-  handlePostsFailed(error) {
+  onPostsFailed(error) {
     this.error = error;
   }
 
-  handleUpdatePosts(data) {
+  onUpdatePosts(data) {
     const {
       page,
       posts,
@@ -71,17 +71,17 @@ export default class AbstractPostStore {
     this.error = null;
   }
 
-  handleUpdatePostsByCategories(posts) {
+  onUpdatePostsByCategories(posts) {
     this.postsByCategories = posts;
     this.error = null;
   }
 
-  handleUpdateLatestPosts(posts) {
+  onUpdateLatestPosts(posts) {
     this.latestPosts = posts;
     this.error = null;
   }
 
-  handleUpdatePost(post) {
+  onUpdatePost(post) {
     const postsLength = this.posts.length;
 
     for (let page = 0; page < postsLength; page += 1) {
@@ -104,7 +104,7 @@ export default class AbstractPostStore {
     this.error = null;
   }
 
-  handleUpdateRevisions(data) {
+  onUpdateRevisions(data) {
     const {
       postID,
       revisions,

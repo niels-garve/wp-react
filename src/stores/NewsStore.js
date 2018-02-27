@@ -6,15 +6,7 @@ class NewsStore extends AbstractPostStore {
   constructor() {
     super();
 
-    this.bindListeners({
-      handleFetchPosts: NewsActions.fetchPosts,
-      handleFetchPost: NewsActions.fetchPost,
-      handleFetchRevisions: NewsActions.fetchRevisions,
-      handlePostsFailed: NewsActions.postsFailed,
-      handleUpdatePosts: NewsActions.updatePosts,
-      handleUpdatePost: NewsActions.updatePost,
-      handleUpdateRevisions: NewsActions.updateRevisions,
-    });
+    this.bindActions(NewsActions);
 
     this.exportPublicMethods({
       getPost: this.getPost,

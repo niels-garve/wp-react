@@ -6,19 +6,7 @@ class PostStore extends AbstractPostStore {
   constructor() {
     super();
 
-    this.bindListeners({
-      handleFetchPosts: PostActions.fetchPosts,
-      handleFetchPostsByCategories: PostActions.fetchPostsByCategories,
-      handleFetchLatestPosts: PostActions.fetchLatestPosts,
-      handleFetchPost: PostActions.fetchPost,
-      handleFetchRevisions: PostActions.fetchRevisions,
-      handlePostsFailed: PostActions.postsFailed,
-      handleUpdatePosts: PostActions.updatePosts,
-      handleUpdatePostsByCategories: PostActions.updatePostsByCategories,
-      handleUpdateLatestPosts: PostActions.updateLatestPosts,
-      handleUpdatePost: PostActions.updatePost,
-      handleUpdateRevisions: PostActions.updateRevisions,
-    });
+    this.bindActions(PostActions);
 
     this.exportPublicMethods({
       getPost: this.getPost,

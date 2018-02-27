@@ -6,24 +6,20 @@ class SiteStore {
     this.siteObj = null;
     this.error = null;
 
-    this.bindListeners({
-      handleFetchSite: SiteActions.fetchSite,
-      handleSiteFailed: SiteActions.siteFailed,
-      handleUpdateSite: SiteActions.updateSite,
-    });
+    this.bindActions(SiteActions);
   }
 
-  handleFetchSite() {
+  onFetchSite() {
     // reset the object while we're fetching new data so React can
     // be smart and render a spinner for us since the data is empty.
     this.siteObj = null;
   }
 
-  handleSiteFailed(error) {
+  onSiteFailed(error) {
     this.error = error;
   }
 
-  handleUpdateSite(siteObj) {
+  onUpdateSite(siteObj) {
     this.siteObj = siteObj;
     this.error = null;
   }

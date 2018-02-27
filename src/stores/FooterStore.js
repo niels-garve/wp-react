@@ -8,15 +8,7 @@ class FooterStore {
     this.footersRevisions = [];
     this.error = null;
 
-    this.bindListeners({
-      handleFetchFooters: FooterActions.fetchFooters,
-      handleFetchFooter: FooterActions.fetchFooter,
-      handleFetchRevisions: FooterActions.fetchRevisions,
-      handleFootersFailed: FooterActions.footersFailed,
-      handleUpdateFooters: FooterActions.updateFooters,
-      handleUpdateFooter: FooterActions.updateFooter,
-      handleUpdateRevisions: FooterActions.updateRevisions,
-    });
+    this.bindActions(FooterActions);
 
     this.exportPublicMethods({
       getFooterRevisions: this.getFooterRevisions,
@@ -25,13 +17,13 @@ class FooterStore {
     });
   }
 
-  handleFetchFooters() {
+  onFetchFooters() {
     // reset the array while we're fetching new footers so React can
     // be smart and render a spinner for us since the data is empty.
     this.footers = [];
   }
 
-  handleFetchFooter(footerID) {
+  onFetchFooter(footerID) {
     const index = _.findIndex(this.footers, obj => obj.id === footerID);
 
     if (index === -1) {
@@ -44,7 +36,7 @@ class FooterStore {
     }
   }
 
-  handleFetchRevisions(footerID) {
+  onFetchRevisions(footerID) {
     const index = _.findIndex(this.footersRevisions, obj => obj.id === footerID);
 
     if (index === -1) {
@@ -57,16 +49,16 @@ class FooterStore {
     }
   }
 
-  handleFootersFailed(error) {
+  onFootersFailed(error) {
     this.error = error;
   }
 
-  handleUpdateFooters(footers) {
+  onUpdateFooters(footers) {
     this.footers = footers;
     this.error = null;
   }
 
-  handleUpdateFooter(footer) {
+  onUpdateFooter(footer) {
     this.footers = _.map(this.footers, (obj) => {
       if (obj.id === footer.id) {
         return footer;
@@ -78,7 +70,7 @@ class FooterStore {
     this.error = null;
   }
 
-  handleUpdateRevisions(data) {
+  onUpdateRevisions(data) {
     const {
       footerID,
       revisions,
