@@ -1,0 +1,15 @@
+@import '../shared/config';
+
+.latest-posts__link {
+  border-bottom-color: $white;
+  display: block;
+  position: relative;
+}
+
+.latest-posts__link-text {
+  background: $white;
+  bottom: 0;
+  padding: .5em;
+  position: absolute;
+  right: 0;
+}

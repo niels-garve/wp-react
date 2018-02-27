@@ -30,7 +30,7 @@ class CategoryNavigation extends React.Component {
       <ul>
         {this.props.postsByCategories.map(category => (
           <li key={`category-${category.id}`}>
-            <h3>{category.name}</h3>
+            <h4>{category.name}</h4>
             <ul>
               {category.posts.map(post => (
                 <li key={`category-${category.id}-post-${post.id}`}>

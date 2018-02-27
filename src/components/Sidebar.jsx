@@ -42,9 +42,8 @@ class Sidebar extends React.Component {
       return <Spinner />;
     }
 
-    return (
-      <h2>{sidebar.title.rendered}</h2>
-    );
+    // TODO adjust to your needs
+    return false;
   }
 
   /**

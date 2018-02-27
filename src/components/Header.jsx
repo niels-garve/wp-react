@@ -6,7 +6,6 @@ import HeaderActions from '../actions/HeaderActions';
 import HeaderStore from '../stores/HeaderStore';
 import Spinner from './Spinner';
 import DefaultError from './DefaultError';
-import RichText from './RichText';
 import withHeaderRevisions from './withHeaderRevisions';
 
 class Header extends React.Component {
@@ -53,7 +52,8 @@ class Header extends React.Component {
       return <Spinner />;
     }
 
-    return <RichText html={header.content.rendered} />;
+    // TODO adjust to your needs
+    return false;
   }
 
   render() {

@@ -8,6 +8,24 @@ import Spinner from './Spinner';
 
 class LatestPosts extends React.Component {
 
+  static buildThumbnail(post) {
+    /* eslint-disable no-underscore-dangle */
+    const thumbnail = post._embedded['wp:featuredmedia'][0].media_details.sizes['post-thumbnail'];
+    const thumbnail2x = post._embedded['wp:featuredmedia'][0].media_details.sizes['post-thumbnail_2x'];
+
+    return (
+      <img
+        height={thumbnail.height}
+        width={thumbnail.width}
+        src={thumbnail.source_url}
+        alt={post._embedded['wp:featuredmedia'][0].alt_text}
+        srcSet={`${thumbnail.source_url} ${thumbnail.width}w, ${thumbnail2x.source_url} ${thumbnail2x.width}w`}
+        sizes="(min-width: 42em) 40em, calc(100vw - 2em)"
+      />
+    );
+    /* eslint-enable no-underscore-dangle */
+  }
+
   componentDidMount() {
     PostActions.fetchLatestPosts.defer();
   }
@@ -27,18 +45,12 @@ class LatestPosts extends React.Component {
     }
 
     return (
-      <ul className="gallery">
+      <ul className="latest-posts">
         {this.props.latestPosts.map(post => (
-          <li className="gallery__item" key={`latest-post-${post.id}`}>
-            <NavLink className="gallery__link" exact to={new URL(post.link).pathname}>
-              {/* TODO implement responsive thumbnails (don't forget to add 'post-thumbnail_2x') */}
-              {/* eslint-disable no-underscore-dangle */}
-              <img
-                className="latest-posts__img"
-                src={post._embedded['wp:featuredmedia'][0].media_details.sizes['post-thumbnail'].source_url}
-                alt={post._embedded['wp:featuredmedia'][0].alt_text}
-              />
-              {/* eslint-enable no-underscore-dangle */}
+          <li key={`latest-post-${post.id}`}>
+            <NavLink className="latest-posts__link" exact to={new URL(post.link).pathname}>
+              {LatestPosts.buildThumbnail(post)}
+              <span className="latest-posts__link-text">{post.title.rendered}</span>
             </NavLink>
           </li>
         ))}

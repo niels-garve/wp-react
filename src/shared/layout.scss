@@ -13,7 +13,7 @@
   @media (min-width: 62.5em) {
     display: grid;
     grid-column-gap: $gutter;
-    grid-template-areas: 'content content side-content';
+    grid-template-areas: 'side-content content content';
     grid-template-columns: 1fr 1fr 1fr;
   }
 }

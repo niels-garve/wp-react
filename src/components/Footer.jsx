@@ -38,9 +38,8 @@ class Footer extends React.Component {
       return <Spinner />;
     }
 
-    return (
-      <h2>{footer.title.rendered}</h2>
-    );
+    // TODO adjust to your needs
+    return false;
   }
 
   render() {
