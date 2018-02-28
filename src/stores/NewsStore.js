@@ -7,12 +7,6 @@ class NewsStore extends AbstractPostStore {
     super();
 
     this.bindActions(NewsActions);
-
-    this.exportPublicMethods({
-      getPost: this.getPost,
-      getPostRevisions: this.getPostRevisions,
-      getPostPreview: this.getPostPreview,
-    });
   }
 }
 

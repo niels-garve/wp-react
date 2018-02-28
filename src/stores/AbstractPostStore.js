@@ -8,6 +8,12 @@ export default class AbstractPostStore {
     this.latestPosts = [];
     this.error = null;
     this.paging = null;
+
+    this.exportPublicMethods({
+      getPost: this.getPost,
+      getPostRevisions: this.getPostRevisions,
+      getPostPreview: this.getPostPreview,
+    });
   }
 
   onFetchPosts(page) {

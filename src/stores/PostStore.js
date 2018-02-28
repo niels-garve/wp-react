@@ -7,12 +7,6 @@ class PostStore extends AbstractPostStore {
     super();
 
     this.bindActions(PostActions);
-
-    this.exportPublicMethods({
-      getPost: this.getPost,
-      getPostRevisions: this.getPostRevisions,
-      getPostPreview: this.getPostPreview,
-    });
   }
 }
 
