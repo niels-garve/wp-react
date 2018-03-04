@@ -1,22 +1,42 @@
 import wp from './wp';
+import HeaderActions from '../actions/HeaderActions';
 
-class HeaderSource {
-  static fetch() {
-    return wp.headers();
-  }
+const HeaderSource = {
+  fetchHeaders: {
+    remote() {
+      return wp.headers();
+    },
+    loading: HeaderActions.loadingHeaders,
+    success: HeaderActions.receivedHeaders,
+    error: HeaderActions.headersFailed,
+  },
 
-  static fetchHeader(headerID) {
-    return wp
-      .headers()
-      .id(headerID);
-  }
+  fetchHeader: {
+    remote(state, headerID) {
+      return wp
+        .headers()
+        .id(headerID);
+    },
+    loading: HeaderActions.loadingHeader,
+    success: HeaderActions.receivedHeader,
+    error: HeaderActions.headersFailed,
+  },
 
-  static fetchRevisions(headerID) {
-    return wp
-      .headers()
-      .id(headerID)
-      .revisions();
-  }
-}
+  fetchHeaderRevisions: {
+    remote(state, headerID) {
+      return wp
+        .headers()
+        .id(headerID)
+        .revisions()
+        .then(revisions => ({
+          headerID,
+          revisions,
+        }));
+    },
+    loading: HeaderActions.loadingHeaderRevisions,
+    success: HeaderActions.receivedHeaderRevisions,
+    error: HeaderActions.headersFailed,
+  },
+};
 
 export default HeaderSource;

@@ -1,6 +1,10 @@
 import _ from 'lodash';
 import alt from '../alt';
 import PageActions from '../actions/PageActions';
+import PageSource from '../sources/PageSource';
+import HeaderStore from './HeaderStore';
+import SidebarStore from './SidebarStore';
+import FooterStore from './FooterStore';
 
 class PageStore {
   constructor() {
@@ -12,18 +16,17 @@ class PageStore {
 
     this.exportPublicMethods({
       getPageBySlug: this.getPageBySlug,
-      getPageRevisions: this.getPageRevisions,
       getPagePreview: this.getPagePreview,
     });
+
+    this.registerAsync(PageSource);
   }
 
-  onFetchPages() {
-    // reset the array while we're fetching new pages so React can
-    // be smart and render a spinner for us since the data is empty.
+  onLoadingPages() {
     this.pages = [];
   }
 
-  onFetchRevisions(pageID) {
+  onLoadingPageRevisions(pageID) {
     const index = _.findIndex(this.pagesRevisions, obj => obj.id === pageID);
 
     if (index === -1) {
@@ -40,12 +43,26 @@ class PageStore {
     this.error = error;
   }
 
-  onUpdatePages(pages) {
-    this.pages = pages;
+  onReceivedPages(data) {
+    this.waitFor([HeaderStore, SidebarStore, FooterStore]);
+
+    const {
+      pages,
+    } = data;
+
+    this.pages = _(pages)
+      .map(page => ({
+        ...page,
+        header: (page.acf.header) ? HeaderStore.getHeader(page.acf.header.ID) : null,
+        sidebar: (page.acf.sidebar) ? SidebarStore.getSidebar(page.acf.sidebar.ID) : null,
+        footer: (page.acf.footer) ? FooterStore.getFooter(page.acf.footer.ID) : null,
+      }))
+      .value();
+
     this.error = null;
   }
 
-  onUpdateRevisions(data) {
+  onReceivedPageRevisions(data) {
     const {
       pageID,
       revisions,
@@ -67,16 +84,6 @@ class PageStore {
 
   getPageBySlug(slug) {
     return _.find(this.getState().pages, page => page.slug === slug) || null;
-  }
-
-  getPageRevisions(id) {
-    const revisionsObj = _.find(this.getState().pagesRevisions, obj => obj.id === id);
-
-    if (revisionsObj) {
-      return revisionsObj.revisions;
-    }
-
-    return [];
   }
 
   getPagePreview(id) {

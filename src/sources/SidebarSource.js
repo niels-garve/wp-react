@@ -1,22 +1,42 @@
 import wp from './wp';
+import SidebarActions from '../actions/SidebarActions';
 
-class SidebarSource {
-  static fetch() {
-    return wp.sidebars();
-  }
+const SidebarSource = {
+  fetchSidebars: {
+    remote() {
+      return wp.sidebars();
+    },
+    loading: SidebarActions.loadingSidebars,
+    success: SidebarActions.receivedSidebars,
+    error: SidebarActions.sidebarsFailed,
+  },
 
-  static fetchSidebar(sidebarID) {
-    return wp
-      .sidebars()
-      .id(sidebarID);
-  }
+  fetchSidebar: {
+    remote(state, sidebarID) {
+      return wp
+        .sidebars()
+        .id(sidebarID);
+    },
+    loading: SidebarActions.loadingSidebar,
+    success: SidebarActions.receivedSidebar,
+    error: SidebarActions.sidebarsFailed,
+  },
 
-  static fetchRevisions(sidebarID) {
-    return wp
-      .sidebars()
-      .id(sidebarID)
-      .revisions();
-  }
-}
+  fetchSidebarRevisions: {
+    remote(state, sidebarID) {
+      return wp
+        .sidebars()
+        .id(sidebarID)
+        .revisions()
+        .then(revisions => ({
+          sidebarID,
+          revisions,
+        }));
+    },
+    loading: SidebarActions.loadingSidebarRevisions,
+    success: SidebarActions.receivedSidebarRevisions,
+    error: SidebarActions.sidebarsFailed,
+  },
+};
 
 export default SidebarSource;

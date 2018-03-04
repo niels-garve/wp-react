@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import alt from '../alt';
 import SidebarActions from '../actions/SidebarActions';
+import PageActions from '../actions/PageActions';
+import SidebarSource from '../sources/SidebarSource';
 
 class SidebarStore {
   constructor() {
@@ -9,21 +11,24 @@ class SidebarStore {
     this.error = null;
 
     this.bindActions(SidebarActions);
+    this.bindListeners({
+      handleLoadingPages: PageActions.LOADING_PAGES,
+      handleReceivedPages: PageActions.RECEIVED_PAGES,
+    });
 
     this.exportPublicMethods({
-      getSidebarRevisions: this.getSidebarRevisions,
-      getSidebarPreview: this.getSidebarPreview,
       getSidebar: this.getSidebar,
+      getSidebarPreview: this.getSidebarPreview,
     });
+
+    this.registerAsync(SidebarSource);
   }
 
-  onFetchSidebars() {
-    // reset the array while we're fetching new sidebars so React can
-    // be smart and render a spinner for us since the data is empty.
+  onLoadingSidebars() {
     this.sidebars = [];
   }
 
-  onFetchSidebar(sidebarID) {
+  onLoadingSidebar(sidebarID) {
     const index = _.findIndex(this.sidebars, obj => obj.id === sidebarID);
 
     if (index === -1) {
@@ -36,7 +41,7 @@ class SidebarStore {
     }
   }
 
-  onFetchRevisions(sidebarID) {
+  onLoadingSidebarRevisions(sidebarID) {
     const index = _.findIndex(this.sidebarsRevisions, obj => obj.id === sidebarID);
 
     if (index === -1) {
@@ -49,16 +54,20 @@ class SidebarStore {
     }
   }
 
+  handleLoadingPages() {
+    this.sidebars = [];
+  }
+
   onSidebarsFailed(error) {
     this.error = error;
   }
 
-  onUpdateSidebars(sidebars) {
+  onReceivedSidebars(sidebars) {
     this.sidebars = sidebars;
     this.error = null;
   }
 
-  onUpdateSidebar(sidebar) {
+  onReceivedSidebar(sidebar) {
     this.sidebars = _.map(this.sidebars, (obj) => {
       if (obj.id === sidebar.id) {
         return sidebar;
@@ -70,7 +79,7 @@ class SidebarStore {
     this.error = null;
   }
 
-  onUpdateRevisions(data) {
+  onReceivedSidebarRevisions(data) {
     const {
       sidebarID,
       revisions,
@@ -90,18 +99,17 @@ class SidebarStore {
     this.error = null;
   }
 
-  getSidebar(id) {
-    return _.find(this.getState().sidebars, sidebar => sidebar.id === id) || null;
+  handleReceivedPages(data) {
+    const {
+      sidebars,
+    } = data;
+
+    this.sidebars = sidebars;
+    this.error = null;
   }
 
-  getSidebarRevisions(id) {
-    const revisionsObj = _.find(this.getState().sidebarsRevisions, obj => obj.id === id);
-
-    if (revisionsObj) {
-      return revisionsObj.revisions;
-    }
-
-    return [];
+  getSidebar(id) {
+    return _.find(this.getState().sidebars, sidebar => sidebar.id === id) || null;
   }
 
   getSidebarPreview(id) {

@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import alt from '../alt';
 import HeaderActions from '../actions/HeaderActions';
+import PageActions from '../actions/PageActions';
+import HeaderSource from '../sources/HeaderSource';
 
 class HeaderStore {
   constructor() {
@@ -9,21 +11,24 @@ class HeaderStore {
     this.error = null;
 
     this.bindActions(HeaderActions);
+    this.bindListeners({
+      handleLoadingPages: PageActions.LOADING_PAGES,
+      handleReceivedPages: PageActions.RECEIVED_PAGES,
+    });
 
     this.exportPublicMethods({
-      getHeaderRevisions: this.getHeaderRevisions,
-      getHeaderPreview: this.getHeaderPreview,
       getHeader: this.getHeader,
+      getHeaderPreview: this.getHeaderPreview,
     });
+
+    this.registerAsync(HeaderSource);
   }
 
-  onFetchHeaders() {
-    // reset the array while we're fetching new headers so React can
-    // be smart and render a spinner for us since the data is empty.
+  onLoadingHeaders() {
     this.headers = [];
   }
 
-  onFetchHeader(headerID) {
+  onLoadingHeader(headerID) {
     const index = _.findIndex(this.headers, obj => obj.id === headerID);
 
     if (index === -1) {
@@ -36,7 +41,7 @@ class HeaderStore {
     }
   }
 
-  onFetchRevisions(headerID) {
+  onLoadingHeaderRevisions(headerID) {
     const index = _.findIndex(this.headersRevisions, obj => obj.id === headerID);
 
     if (index === -1) {
@@ -49,16 +54,20 @@ class HeaderStore {
     }
   }
 
+  handleLoadingPages() {
+    this.headers = [];
+  }
+
   onHeadersFailed(error) {
     this.error = error;
   }
 
-  onUpdateHeaders(headers) {
+  onReceivedHeaders(headers) {
     this.headers = headers;
     this.error = null;
   }
 
-  onUpdateHeader(header) {
+  onReceivedHeader(header) {
     this.headers = _.map(this.headers, (obj) => {
       if (obj.id === header.id) {
         return header;
@@ -70,7 +79,7 @@ class HeaderStore {
     this.error = null;
   }
 
-  onUpdateRevisions(data) {
+  onReceivedHeaderRevisions(data) {
     const {
       headerID,
       revisions,
@@ -90,18 +99,17 @@ class HeaderStore {
     this.error = null;
   }
 
-  getHeader(id) {
-    return _.find(this.getState().headers, header => header.id === id) || null;
+  handleReceivedPages(data) {
+    const {
+      headers,
+    } = data;
+
+    this.headers = headers;
+    this.error = null;
   }
 
-  getHeaderRevisions(id) {
-    const revisionsObj = _.find(this.getState().headersRevisions, obj => obj.id === id);
-
-    if (revisionsObj) {
-      return revisionsObj.revisions;
-    }
-
-    return [];
+  getHeader(id) {
+    return _.find(this.getState().headers, header => header.id === id) || null;
   }
 
   getHeaderPreview(id) {

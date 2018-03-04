@@ -1,22 +1,43 @@
 import wp from './wp';
+import FooterActions from '../actions/FooterActions';
 
-class FooterSource {
-  static fetch() {
-    return wp.footers();
-  }
+const FooterSource = {
+  fetchFooters: {
+    remote() {
+      return wp.footers();
+    },
+    loading: FooterActions.loadingFooters,
+    success: FooterActions.receivedFooters,
+    error: FooterActions.footersFailed,
+  },
 
-  static fetchFooter(footerID) {
-    return wp
-      .footers()
-      .id(footerID);
-  }
+  fetchFooter: {
+    remote(state, footerID) {
+      return wp
+        .footers()
+        .id(footerID);
+    },
+    loading: FooterActions.loadingFooter,
+    success: FooterActions.receivedFooter,
+    error: FooterActions.footersFailed,
 
-  static fetchRevisions(footerID) {
-    return wp
-      .footers()
-      .id(footerID)
-      .revisions();
-  }
-}
+  },
+
+  fetchFooterRevisions: {
+    remote(state, footerID) {
+      return wp
+        .footers()
+        .id(footerID)
+        .revisions()
+        .then(revisions => ({
+          footerID,
+          revisions,
+        }));
+    },
+    loading: FooterActions.loadingFooterRevisions,
+    success: FooterActions.receivedFooterRevisions,
+    error: FooterActions.footersFailed,
+  },
+};
 
 export default FooterSource;

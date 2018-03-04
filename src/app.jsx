@@ -7,9 +7,9 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
+import connectToStores from 'alt-utils/lib/connectToStores';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
-import AltContainer from 'alt-container';
 import OfflinePluginRuntime from 'offline-plugin/runtime';
 
 /* eslint-disable no-unused-vars */
@@ -20,9 +20,7 @@ import styles from './app.scss';
 import Spinner from './components/Spinner';
 import DefaultError from './components/DefaultError';
 
-import PageActions from './actions/PageActions';
 import PageStore from './stores/PageStore';
-import SiteActions from './actions/SiteActions';
 import SiteStore from './stores/SiteStore';
 import Home from './components/Home';
 import DefaultPage from './components/DefaultPage';
@@ -35,9 +33,20 @@ const TEMPLATES = {
 
 class App extends React.Component {
 
+  static getStores() {
+    return [PageStore, SiteStore];
+  }
+
+  static getPropsFromStores() {
+    return {
+      Pages: PageStore.getState(),
+      Site: SiteStore.getState(),
+    };
+  }
+
   componentDidMount() {
-    PageActions.fetchPages();
-    SiteActions.fetchSite();
+    PageStore.fetchPages();
+    SiteStore.fetchSite();
   }
 
   buildRoutes() {
@@ -163,11 +172,11 @@ App.defaultProps = {
   },
 };
 
+const AppContainer = connectToStores(App);
+
 OfflinePluginRuntime.install();
 
 ReactDOM.render(
-  <AltContainer stores={{ Pages: PageStore, Site: SiteStore }}>
-    <App />
-  </AltContainer>,
+  <AppContainer />,
   document.getElementById('app'),
 );
