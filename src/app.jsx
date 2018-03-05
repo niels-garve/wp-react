@@ -55,9 +55,28 @@ class App extends React.Component {
         key={page.id}
         path={`/${page.slug}`}
         exact
-        render={() => {
+        render={(props) => {
+          const params = queryString.parse(props.location.search);
           const Component = TEMPLATES[page.slug] || DefaultPage;
-          return <Component slug={page.slug} />;
+
+          // not in preview mode
+          if (params.preview !== 'true') {
+            return <Component id={page.id} preview={false} />;
+          }
+
+          const previewID = parseInt(params.preview_id, 10);
+
+          // page preview
+          if (!isNaN(previewID)) {
+            return <Component id={previewID} preview />;
+          }
+
+          return (
+            <DefaultError
+              title="Page not found"
+              text="Sorry, but the page you were trying to view does not exist."
+            />
+          );
         }}
       />
     ));
@@ -87,6 +106,7 @@ class App extends React.Component {
               render={(props) => {
                 const params = queryString.parse(props.location.search);
 
+                // not in draft preview mode
                 if (params.preview !== 'true') {
                   return <Redirect exact from="/" to={`/${redirectSlug}`} />;
                 }
@@ -96,24 +116,20 @@ class App extends React.Component {
 
                 // post draft preview
                 if (!isNaN(postID)) {
-                  switch (params.post_type) {
-                    case 'headers':
-                    case 'sidebars':
-                    case 'footers':
-                      return <DefaultPage slug={redirectSlug} />;
-                    default:
-                      return <DefaultPost id={postID} />;
-                  }
+                  return <DefaultPost id={postID} preview />;
                 }
 
                 // page draft preview
                 if (!isNaN(pageID)) {
-                  // slug can be an empty string - the page is loaded by pageID (preview mode)
-                  return <DefaultPage slug="" />;
+                  return <DefaultPage id={pageID} preview />;
                 }
 
-                // fallback
-                return <Redirect exact from="/" to={`/${redirectSlug}`} />;
+                return (
+                  <DefaultError
+                    title="Page not found"
+                    text="Sorry, but the page you were trying to view does not exist."
+                  />
+                );
               }}
             />
 
@@ -124,15 +140,26 @@ class App extends React.Component {
               path="/archives/:id/:slug?"
               render={(props) => {
                 const id = parseInt(props.match.params.id, 10);
+                const params = queryString.parse(props.location.search);
 
-                switch (props.match.params.id) {
-                  case 'headers':
-                  case 'sidebars':
-                  case 'footers':
-                    return <DefaultPage slug={redirectSlug} />;
-                  default:
-                    return <DefaultPost id={id} />;
+                // not in preview mode
+                if (params.preview !== 'true') {
+                  return <DefaultPost id={id} preview={false} />;
                 }
+
+                const previewID = parseInt(params.preview_id, 10);
+
+                // post preview
+                if (!isNaN(previewID)) {
+                  return <DefaultPost id={previewID} preview />;
+                }
+
+                return (
+                  <DefaultError
+                    title="Page not found"
+                    text="Sorry, but the page you were trying to view does not exist."
+                  />
+                );
               }}
             />
 

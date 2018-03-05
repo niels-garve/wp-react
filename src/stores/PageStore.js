@@ -15,7 +15,7 @@ class PageStore {
     this.bindActions(PageActions);
 
     this.exportPublicMethods({
-      getPageBySlug: this.getPageBySlug,
+      getPage: this.getPage,
       getPagePreview: this.getPagePreview,
     });
 
@@ -24,19 +24,6 @@ class PageStore {
 
   onLoadingPages() {
     this.pages = [];
-  }
-
-  onLoadingPageRevisions(pageID) {
-    const index = _.findIndex(this.pagesRevisions, obj => obj.id === pageID);
-
-    if (index === -1) {
-      this.pagesRevisions.push({
-        id: pageID,
-        revisions: [],
-      });
-    } else {
-      this.pagesRevisions[index].revisions = [];
-    }
   }
 
   onPagesFailed(error) {
@@ -67,23 +54,22 @@ class PageStore {
       pageID,
       revisions,
     } = data;
+    const index = _.findIndex(this.pagesRevisions, obj => obj.id === pageID);
 
-    this.pagesRevisions = _.map(this.pagesRevisions, (obj) => {
-      if (obj.id === pageID) {
-        return {
-          ...obj,
-          revisions,
-        };
-      }
-
-      return obj;
-    });
+    if (index === -1) {
+      this.pagesRevisions.push({
+        id: pageID,
+        revisions,
+      });
+    } else {
+      this.pagesRevisions[index].revisions = revisions;
+    }
 
     this.error = null;
   }
 
-  getPageBySlug(slug) {
-    return _.find(this.getState().pages, page => page.slug === slug) || null;
+  getPage(id) {
+    return _.find(this.getState().pages, page => page.id === id) || null;
   }
 
   getPagePreview(id) {

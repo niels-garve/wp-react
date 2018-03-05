@@ -34,7 +34,7 @@ const PageSource = {
           revisions,
         }));
     },
-    loading: PageActions.loadingPageRevisions,
+    // no loading, see https://github.com/goatslacker/alt/issues/556
     success: PageActions.receivedPageRevisions,
     error: PageActions.pagesFailed,
   },

@@ -6,7 +6,6 @@ class PageActions {
       'loadingPages',
       'receivedPages',
       'pagesFailed',
-      'loadingPageRevisions',
       'receivedPageRevisions',
     );
   }

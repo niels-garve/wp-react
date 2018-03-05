@@ -2,7 +2,6 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import _ from 'lodash';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -10,7 +9,6 @@ import Sidebar from './Sidebar';
 
 import PageStore from '../stores/PageStore';
 import Spinner from './Spinner';
-import withPageRevisions from './withPageRevisions';
 
 function withPageLayout(Page) {
   class PageLayout extends React.Component {
@@ -22,13 +20,17 @@ function withPageLayout(Page) {
       return PageStore.getState();
     }
 
-    render() {
-      let page = null;
+    componentDidMount() {
+      if (this.props.preview) {
+        PageStore.fetchPageRevisions(this.props.id);
+      }
+    }
 
-      if (this.props.revisionID === -1) {
-        page = PageStore.getPageBySlug(this.props.slug);
-      } else {
-        page = PageStore.getPagePreview(this.props.revisionID);
+    render() {
+      let page = PageStore.getPage(this.props.id);
+
+      if (this.props.preview) {
+        page = PageStore.getPagePreview(this.props.id);
       }
 
       if (page === null) {
@@ -81,12 +83,11 @@ function withPageLayout(Page) {
   }
 
   PageLayout.propTypes = {
-    slug: PropTypes.string.isRequired,
-    revisionID: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    preview: PropTypes.bool.isRequired,
   };
 
-  // @see https://reactjs.org/docs/higher-order-components.html
-  return _.flowRight([withPageRevisions, connectToStores])(PageLayout);
+  return connectToStores(PageLayout);
 }
 
 export default withPageLayout;
