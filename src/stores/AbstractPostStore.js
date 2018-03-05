@@ -11,7 +11,6 @@ export default class AbstractPostStore {
 
     this.exportPublicMethods({
       getPost: this.getPost,
-      getPostRevisions: this.getPostRevisions,
       getPostPreview: this.getPostPreview,
     });
   }
@@ -142,16 +141,6 @@ export default class AbstractPostStore {
     }
 
     return null;
-  }
-
-  getPostRevisions(id) {
-    const revisionsObj = _.find(this.getState().postsRevisions, obj => obj.id === id);
-
-    if (revisionsObj) {
-      return revisionsObj.revisions;
-    }
-
-    return [];
   }
 
   getPostPreview(id) {

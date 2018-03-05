@@ -1,14 +1,24 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import connectToStores from 'alt-utils/lib/connectToStores';
 
-import HeaderActions from '../actions/HeaderActions';
 import HeaderStore from '../stores/HeaderStore';
-import Spinner from './Spinner';
-import DefaultError from './DefaultError';
-import withHeaderRevisions from './withHeaderRevisions';
+import PageStore from '../stores/PageStore';
+import SiteStore from '../stores/SiteStore';
+import RichText from './RichText';
 
 class Header extends React.Component {
+  static getStores() {
+    return [PageStore, SiteStore];
+  }
+
+  static getPropsFromStores() {
+    return {
+      pages: PageStore.getState().pages,
+      title: SiteStore.getState().siteObj.name,
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -18,45 +28,9 @@ class Header extends React.Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.revisionID !== -1) {
-      HeaderActions.fetchRevisions.defer(this.props.revisionID);
-    } else if (this.props.id !== -1) {
-      HeaderActions.fetchHeader.defer(this.props.id);
-    }
-  }
-
-  buildHeader() {
-    if (this.props.id === -1 && this.props.revisionID === -1) {
-      return false;
-    }
-
-    if (this.props.error !== null) {
-      return (
-        <DefaultError
-          text="Sorry, we could not load the header."
-          error={this.props.error}
-        />
-      );
-    }
-
-    let header = null;
-
-    if (this.props.revisionID === -1) {
-      header = HeaderStore.getHeader(this.props.id);
-    } else {
-      header = HeaderStore.getHeaderPreview(this.props.revisionID);
-    }
-
-    if (header === null || header.isLoading) {
-      return <Spinner />;
-    }
-
-    // TODO adjust to your needs
-    return false;
-  }
-
   render() {
+    const header = HeaderStore.getHeader(this.props.id);
+
     return (
       <header className="header">
         <div className="header__container l-container">
@@ -81,9 +55,11 @@ class Header extends React.Component {
               ))}
             </ul>
           </nav>
+          {header &&
           <div className="header__content">
-            {this.buildHeader()}
+            <RichText html={header.content.rendered} />
           </div>
+          }
         </div>
       </header>
     );
@@ -92,15 +68,12 @@ class Header extends React.Component {
 
 Header.propTypes = {
   id: PropTypes.number,
-  revisionID: PropTypes.number.isRequired,
-  pages: PropTypes.arrayOf(PropTypes.object).isRequired, // page collection
+  pages: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
-  error: PropTypes.shape({}),
 };
 
 Header.defaultProps = {
   id: -1,
-  error: null,
 };
 
-export default withHeaderRevisions(Header);
+export default connectToStores(Header);

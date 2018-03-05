@@ -12,10 +12,10 @@ import withPostRevisions from './withPostRevisions';
 function withPostLayout(Post) {
   class PostLayout extends React.Component {
     componentDidMount() {
-      if (this.props.revisionID === -1) {
-        PostActions.fetchPost.defer(this.props.id);
+      if (this.props.preview) {
+        PostActions.fetchRevisions.defer(this.props.id);
       } else {
-        PostActions.fetchRevisions.defer(this.props.revisionID);
+        PostActions.fetchPost.defer(this.props.id);
       }
     }
 
@@ -30,12 +30,10 @@ function withPostLayout(Post) {
         );
       }
 
-      let post = null;
+      let post = PostStore.getPost(this.props.id);
 
-      if (this.props.revisionID === -1) {
-        post = PostStore.getPost(this.props.id);
-      } else {
-        post = PostStore.getPostPreview(this.props.revisionID);
+      if (this.props.preview) {
+        post = PostStore.getPostPreview(this.props.id);
       }
 
       if (post === null || post.isLoading) {
@@ -77,7 +75,7 @@ function withPostLayout(Post) {
 
   PostLayout.propTypes = {
     id: PropTypes.number.isRequired,
-    revisionID: PropTypes.number.isRequired,
+    preview: PropTypes.bool.isRequired,
     error: PropTypes.shape({}),
   };
 
