@@ -7,7 +7,6 @@ import SidebarSource from '../sources/SidebarSource';
 class SidebarStore {
   constructor() {
     this.sidebars = [];
-    this.sidebarsRevisions = [];
     this.error = null;
 
     this.bindActions(SidebarActions);
@@ -18,7 +17,6 @@ class SidebarStore {
 
     this.exportPublicMethods({
       getSidebar: this.getSidebar,
-      getSidebarPreview: this.getSidebarPreview,
     });
 
     this.registerAsync(SidebarSource);
@@ -38,19 +36,6 @@ class SidebarStore {
       });
     } else {
       this.sidebars[index].isLoading = true;
-    }
-  }
-
-  onLoadingSidebarRevisions(sidebarID) {
-    const index = _.findIndex(this.sidebarsRevisions, obj => obj.id === sidebarID);
-
-    if (index === -1) {
-      this.sidebarsRevisions.push({
-        id: sidebarID,
-        revisions: [],
-      });
-    } else {
-      this.sidebarsRevisions[index].revisions = [];
     }
   }
 
@@ -79,26 +64,6 @@ class SidebarStore {
     this.error = null;
   }
 
-  onReceivedSidebarRevisions(data) {
-    const {
-      sidebarID,
-      revisions,
-    } = data;
-
-    this.sidebarsRevisions = _.map(this.sidebarsRevisions, (obj) => {
-      if (obj.id === sidebarID) {
-        return {
-          ...obj,
-          revisions,
-        };
-      }
-
-      return obj;
-    });
-
-    this.error = null;
-  }
-
   handleReceivedPages(data) {
     const {
       sidebars,
@@ -110,16 +75,6 @@ class SidebarStore {
 
   getSidebar(id) {
     return _.find(this.getState().sidebars, sidebar => sidebar.id === id) || null;
-  }
-
-  getSidebarPreview(id) {
-    const revisionsObj = _.find(this.getState().sidebarsRevisions, obj => obj.id === id);
-
-    if (revisionsObj && revisionsObj.revisions.length > 0) {
-      return revisionsObj.revisions[0];
-    }
-
-    return null;
   }
 }
 

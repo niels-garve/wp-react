@@ -20,23 +20,6 @@ const FooterSource = {
     loading: FooterActions.loadingFooter,
     success: FooterActions.receivedFooter,
     error: FooterActions.footersFailed,
-
-  },
-
-  fetchFooterRevisions: {
-    remote(state, footerID) {
-      return wp
-        .footers()
-        .id(footerID)
-        .revisions()
-        .then(revisions => ({
-          footerID,
-          revisions,
-        }));
-    },
-    loading: FooterActions.loadingFooterRevisions,
-    success: FooterActions.receivedFooterRevisions,
-    error: FooterActions.footersFailed,
   },
 };
 

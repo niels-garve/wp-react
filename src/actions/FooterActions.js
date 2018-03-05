@@ -9,8 +9,6 @@ class FooterActions {
       'footersFailed',
       'loadingFooter',
       'receivedFooter',
-      'loadingFooterRevisions',
-      'receivedFooterRevisions',
     );
   }
 }

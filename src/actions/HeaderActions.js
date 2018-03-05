@@ -9,8 +9,6 @@ class HeaderActions {
       'headersFailed',
       'loadingHeader',
       'receivedHeader',
-      'loadingHeaderRevisions',
-      'receivedHeaderRevisions',
     );
   }
 }

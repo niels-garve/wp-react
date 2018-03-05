@@ -9,8 +9,6 @@ class SidebarActions {
       'sidebarsFailed',
       'loadingSidebar',
       'receivedSidebar',
-      'loadingSidebarRevisions',
-      'receivedSidebarRevisions',
     );
   }
 }

@@ -7,7 +7,6 @@ import FooterSource from '../sources/FooterSource';
 class FooterStore {
   constructor() {
     this.footers = [];
-    this.footersRevisions = [];
     this.error = null;
 
     this.bindActions(FooterActions);
@@ -18,7 +17,6 @@ class FooterStore {
 
     this.exportPublicMethods({
       getFooter: this.getFooter,
-      getFooterPreview: this.getFooterPreview,
     });
 
     this.registerAsync(FooterSource);
@@ -38,19 +36,6 @@ class FooterStore {
       });
     } else {
       this.footers[index].isLoading = true;
-    }
-  }
-
-  onLoadingFooterRevisions(footerID) {
-    const index = _.findIndex(this.footersRevisions, obj => obj.id === footerID);
-
-    if (index === -1) {
-      this.footersRevisions.push({
-        id: footerID,
-        revisions: [],
-      });
-    } else {
-      this.footersRevisions[index].revisions = [];
     }
   }
 
@@ -79,26 +64,6 @@ class FooterStore {
     this.error = null;
   }
 
-  onReceivedFooterRevisions(data) {
-    const {
-      footerID,
-      revisions,
-    } = data;
-
-    this.footersRevisions = _.map(this.footersRevisions, (obj) => {
-      if (obj.id === footerID) {
-        return {
-          ...obj,
-          revisions,
-        };
-      }
-
-      return obj;
-    });
-
-    this.error = null;
-  }
-
   handleReceivedPages(data) {
     const {
       footers,
@@ -110,16 +75,6 @@ class FooterStore {
 
   getFooter(id) {
     return _.find(this.getState().footers, footer => footer.id === id) || null;
-  }
-
-  getFooterPreview(id) {
-    const revisionsObj = _.find(this.getState().footersRevisions, obj => obj.id === id);
-
-    if (revisionsObj && revisionsObj.revisions.length > 0) {
-      return revisionsObj.revisions[0];
-    }
-
-    return null;
   }
 }
 

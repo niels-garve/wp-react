@@ -21,22 +21,6 @@ const HeaderSource = {
     success: HeaderActions.receivedHeader,
     error: HeaderActions.headersFailed,
   },
-
-  fetchHeaderRevisions: {
-    remote(state, headerID) {
-      return wp
-        .headers()
-        .id(headerID)
-        .revisions()
-        .then(revisions => ({
-          headerID,
-          revisions,
-        }));
-    },
-    loading: HeaderActions.loadingHeaderRevisions,
-    success: HeaderActions.receivedHeaderRevisions,
-    error: HeaderActions.headersFailed,
-  },
 };
 
 export default HeaderSource;

@@ -21,22 +21,6 @@ const SidebarSource = {
     success: SidebarActions.receivedSidebar,
     error: SidebarActions.sidebarsFailed,
   },
-
-  fetchSidebarRevisions: {
-    remote(state, sidebarID) {
-      return wp
-        .sidebars()
-        .id(sidebarID)
-        .revisions()
-        .then(revisions => ({
-          sidebarID,
-          revisions,
-        }));
-    },
-    loading: SidebarActions.loadingSidebarRevisions,
-    success: SidebarActions.receivedSidebarRevisions,
-    error: SidebarActions.sidebarsFailed,
-  },
 };
 
 export default SidebarSource;
