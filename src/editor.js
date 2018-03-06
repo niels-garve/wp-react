@@ -1,3 +1,2 @@
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 import styles from './editor.scss';
-/* eslint-enable no-unused-vars */

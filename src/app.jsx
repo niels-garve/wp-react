@@ -12,10 +12,9 @@ import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import OfflinePluginRuntime from 'offline-plugin/runtime';
 
-/* eslint-disable no-unused-vars */
 // TODO import fonts from './fonts/xxx.scss';
+// eslint-disable-next-line no-unused-vars
 import styles from './app.scss';
-/* eslint-enable no-unused-vars */
 
 import Spinner from './components/Spinner';
 import DefaultError from './components/DefaultError';
@@ -149,9 +148,16 @@ class App extends React.Component {
 
                 const previewID = parseInt(params.preview_id, 10);
 
+                function getThumbnailID() {
+                  // eslint-disable-next-line no-underscore-dangle
+                  const thumbnailID = parseInt(params._thumbnail_id, 10);
+
+                  return isNaN(thumbnailID) ? -1 : thumbnailID;
+                }
+
                 // post preview
                 if (!isNaN(previewID)) {
-                  return <DefaultPost id={previewID} preview />;
+                  return <DefaultPost id={previewID} preview thumbnailID={getThumbnailID()} />;
                 }
 
                 return (

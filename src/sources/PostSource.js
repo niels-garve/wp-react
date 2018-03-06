@@ -68,11 +68,37 @@ class PostSource {
       ));
   }
 
-  static fetchRevisions(postID) {
-    return wp
-      .posts()
-      .id(postID)
-      .revisions();
+  static fetchRevisions(postID, thumbnailID) {
+    const requests = [
+      wp
+        .posts()
+        .id(postID)
+        .revisions(),
+    ];
+
+    if (thumbnailID !== -1) {
+      requests.push(
+        wp
+          .media()
+          .id(thumbnailID),
+      );
+    }
+
+    return Promise.all(requests)
+      .then((data) => {
+        const revisions = data[0];
+
+        if (data.length >= 2) {
+          revisions[0] = {
+            ...revisions[0],
+            _embedded: {
+              'wp:featuredmedia': [data[1]],
+            },
+          };
+        }
+
+        return revisions;
+      });
   }
 }
 

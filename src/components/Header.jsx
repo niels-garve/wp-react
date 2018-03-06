@@ -1,25 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import connectToStores from 'alt-utils/lib/connectToStores';
-
-import HeaderStore from '../stores/HeaderStore';
-import PageStore from '../stores/PageStore';
-import SiteStore from '../stores/SiteStore';
 import RichText from './RichText';
 
 class Header extends React.Component {
-  static getStores() {
-    return [PageStore, SiteStore];
-  }
-
-  static getPropsFromStores() {
-    return {
-      pages: PageStore.getState().pages,
-      title: SiteStore.getState().siteObj.name,
-    };
-  }
-
   constructor(props) {
     super(props);
 
@@ -29,8 +13,6 @@ class Header extends React.Component {
   }
 
   render() {
-    const header = HeaderStore.getHeader(this.props.id);
-
     return (
       <header className="header">
         <div className="header__container l-container">
@@ -55,9 +37,9 @@ class Header extends React.Component {
               ))}
             </ul>
           </nav>
-          {header &&
+          {this.props.header &&
           <div className="header__content">
-            <RichText html={header.content.rendered} />
+            <RichText html={this.props.header.content.rendered} />
           </div>
           }
         </div>
@@ -67,13 +49,17 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  id: PropTypes.number,
+  header: PropTypes.shape({
+    content: PropTypes.shape({
+      rendered: PropTypes.string,
+    }),
+  }),
   pages: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
 };
 
 Header.defaultProps = {
-  id: -1,
+  header: null,
 };
 
-export default connectToStores(Header);
+export default Header;

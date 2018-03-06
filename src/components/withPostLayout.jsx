@@ -1,19 +1,35 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
+import connectToStores from 'alt-utils/lib/connectToStores';
+
 import PostStore from '../stores/PostStore';
+import PageStore from '../stores/PageStore';
+import SiteStore from '../stores/SiteStore';
+import HeaderStore from '../stores/HeaderStore';
 import PostActions from '../actions/PostActions';
 import Header from './Header';
 import Footer from './Footer';
 import DefaultError from './DefaultError';
 import Spinner from './Spinner';
-import withPostRevisions from './withPostRevisions';
 
 function withPostLayout(Post) {
   class PostLayout extends React.Component {
+    static getStores() {
+      return [PageStore, SiteStore, PostStore];
+    }
+
+    static getPropsFromStores() {
+      return {
+        pages: PageStore.getState().pages,
+        siteObj: SiteStore.getState().siteObj,
+        ...PostStore.getState(),
+      };
+    }
+
     componentDidMount() {
       if (this.props.preview) {
-        PostActions.fetchRevisions.defer(this.props.id);
+        PostActions.fetchRevisions.defer(this.props.id, this.props.thumbnailID);
       } else {
         PostActions.fetchPost.defer(this.props.id);
       }
@@ -40,6 +56,8 @@ function withPostLayout(Post) {
         return <Spinner layoutModifier="app" />;
       }
 
+      const header = post.acf.header ? HeaderStore.getHeader(post.acf.header.ID) : null;
+
       return (
         <div>
           {post.yoast_meta &&
@@ -52,11 +70,7 @@ function withPostLayout(Post) {
             <meta property="og:url" content={post.yoast_meta.yoast_wpseo_canonical} />
           </Helmet>
           }
-          {post.acf.header ?
-            <Header id={post.acf.header.ID} />
-            :
-            <Header />
-          }
+          <Header header={header} pages={this.props.pages} title={this.props.siteObj.name} />
           <main className="l-container l-main">
             <article className="l-main__content">
               <Post
@@ -76,14 +90,20 @@ function withPostLayout(Post) {
   PostLayout.propTypes = {
     id: PropTypes.number.isRequired,
     preview: PropTypes.bool.isRequired,
+    thumbnailID: PropTypes.number,
     error: PropTypes.shape({}),
+    pages: PropTypes.arrayOf(PropTypes.object).isRequired,
+    siteObj: PropTypes.shape({
+      name: PropTypes.string,
+    }).isRequired,
   };
 
   PostLayout.defaultProps = {
+    thumbnailID: -1,
     error: null,
   };
 
-  return withPostRevisions(PostLayout);
+  return connectToStores(PostLayout);
 }
 
 export default withPostLayout;

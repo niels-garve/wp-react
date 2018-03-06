@@ -8,16 +8,20 @@ import Footer from './Footer';
 import Sidebar from './Sidebar';
 
 import PageStore from '../stores/PageStore';
+import SiteStore from '../stores/SiteStore';
 import Spinner from './Spinner';
 
 function withPageLayout(Page) {
   class PageLayout extends React.Component {
     static getStores() {
-      return [PageStore];
+      return [PageStore, SiteStore];
     }
 
     static getPropsFromStores() {
-      return PageStore.getState();
+      return {
+        ...PageStore.getState(),
+        ...SiteStore.getState(),
+      };
     }
 
     componentDidMount() {
@@ -49,11 +53,7 @@ function withPageLayout(Page) {
             <meta property="og:url" content={page.yoast_meta.yoast_wpseo_canonical} />
           </Helmet>
           }
-          {page.acf.header ?
-            <Header id={page.acf.header.ID} />
-            :
-            <Header />
-          }
+          <Header header={page.header} pages={this.props.pages} title={this.props.siteObj.name} />
           {page.acf.sidebar ?
             <main className="l-container l-main">
               <article className="l-main__content">
@@ -85,6 +85,10 @@ function withPageLayout(Page) {
   PageLayout.propTypes = {
     id: PropTypes.number.isRequired,
     preview: PropTypes.bool.isRequired,
+    pages: PropTypes.arrayOf(PropTypes.object).isRequired,
+    siteObj: PropTypes.shape({
+      name: PropTypes.string,
+    }).isRequired,
   };
 
   return connectToStores(PageLayout);

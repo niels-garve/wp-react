@@ -64,11 +64,11 @@ class PostActions {
     };
   }
 
-  fetchRevisions(postID) {
+  fetchRevisions(postID, thumbnailID) {
     return (dispatch) => {
       // we dispatch an event here so we can have `loading` state.
       dispatch(postID);
-      PostSource.fetchRevisions(postID)
+      PostSource.fetchRevisions(postID, thumbnailID)
         .then((revisions) => {
           this.updateRevisions(postID, revisions);
         })
