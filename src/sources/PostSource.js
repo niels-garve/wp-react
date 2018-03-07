@@ -68,7 +68,7 @@ class PostSource {
       ));
   }
 
-  static fetchRevisions(postID, thumbnailID) {
+  static fetchPreview(postID, thumbnailID) {
     const requests = [
       wp
         .posts()
@@ -86,18 +86,18 @@ class PostSource {
 
     return Promise.all(requests)
       .then((data) => {
-        const revisions = data[0];
+        const preview = data[0][0];
 
         if (data.length >= 2) {
-          revisions[0] = {
-            ...revisions[0],
+          return {
+            ...preview,
             _embedded: {
               'wp:featuredmedia': [data[1]],
             },
           };
         }
 
-        return revisions;
+        return preview;
       });
   }
 }

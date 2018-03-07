@@ -4,7 +4,7 @@ export default class AbstractPostStore {
   constructor() {
     this.posts = [];
     this.postsByCategories = [];
-    this.postsRevisions = [];
+    this.postsPreview = [];
     this.latestPosts = [];
     this.error = null;
     this.paging = null;
@@ -47,16 +47,16 @@ export default class AbstractPostStore {
     }]);
   }
 
-  onFetchRevisions(postID) {
-    const index = _.findIndex(this.postsRevisions, obj => obj.id === postID);
+  onFetchPreview(postID) {
+    const index = _.findIndex(this.postsPreview, obj => obj.id === postID);
 
     if (index === -1) {
-      this.postsRevisions.push({
+      this.postsPreview.push({
         id: postID,
-        revisions: [],
+        preview: null,
       });
     } else {
-      this.postsRevisions[index].revisions = [];
+      this.postsPreview[index].preview = null;
     }
   }
 
@@ -109,17 +109,17 @@ export default class AbstractPostStore {
     this.error = null;
   }
 
-  onUpdateRevisions(data) {
+  onUpdatePreview(data) {
     const {
       postID,
-      revisions,
+      preview,
     } = data;
 
-    this.postsRevisions = _.map(this.postsRevisions, (obj) => {
+    this.postsPreview = _.map(this.postsPreview, (obj) => {
       if (obj.id === postID) {
         return {
           ...obj,
-          revisions,
+          preview,
         };
       }
 
@@ -144,10 +144,10 @@ export default class AbstractPostStore {
   }
 
   getPostPreview(id) {
-    const revisionsObj = _.find(this.getState().postsRevisions, obj => obj.id === id);
+    const previewObject = _.find(this.getState().postsPreview, obj => obj.id === id);
 
-    if (revisionsObj && revisionsObj.revisions.length > 0) {
-      return revisionsObj.revisions[0];
+    if (previewObject && previewObject.preview) {
+      return previewObject.preview;
     }
 
     return null;

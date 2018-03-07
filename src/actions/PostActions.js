@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this, no-underscore-dangle */
 import alt from '../alt';
 import PostSource from '../sources/PostSource';
 
@@ -6,6 +5,15 @@ class PostActions {
 
   constructor(category) {
     this.category = category || 'uncategorized';
+
+    this.generateActions(
+      'postsFailed',
+      'updatePosts',
+      'updatePostsByCategories',
+      'updateLatestPosts',
+      'updatePost',
+      'updatePreview',
+    );
   }
 
   fetchPosts(page = 1) {
@@ -14,7 +22,11 @@ class PostActions {
       dispatch(page);
       PostSource.fetch(this.category, page)
         .then((posts) => {
-          this.updatePosts(page, posts, posts._paging);
+          this.updatePosts({
+            page,
+            posts,
+            paging: posts._paging, // eslint-disable-line no-underscore-dangle
+          });
         })
         .catch((error) => {
           this.postsFailed(error);
@@ -64,81 +76,20 @@ class PostActions {
     };
   }
 
-  fetchRevisions(postID, thumbnailID) {
+  fetchPreview(postID, thumbnailID) {
     return (dispatch) => {
       // we dispatch an event here so we can have `loading` state.
       dispatch(postID);
-      PostSource.fetchRevisions(postID, thumbnailID)
-        .then((revisions) => {
-          this.updateRevisions(postID, revisions);
+      PostSource.fetchPreview(postID, thumbnailID)
+        .then((preview) => {
+          this.updatePreview({
+            postID,
+            preview,
+          });
         })
         .catch((error) => {
           this.postsFailed(error);
         });
-    };
-  }
-
-  /**
-   * can't be static due to altjs
-   * @param error
-   * @returns {Error}
-   */
-  postsFailed(error) {
-    return error;
-  }
-
-  /**
-   * can't be static due to altjs
-   * @param page
-   * @param posts
-   * @param paging
-   * @returns {{page: *, posts: *, paging: *}}
-   */
-  updatePosts(page, posts, paging) {
-    return {
-      page,
-      posts,
-      paging,
-    };
-  }
-
-  /**
-   * can't be static due to altjs
-   * @param posts
-   * @returns {[{}, {}]} post collection
-   */
-  updatePostsByCategories(posts) {
-    return posts;
-  }
-
-  /**
-   * can't be static due to altjs
-   * @param posts
-   * @returns {[{}, {}]} post collection
-   */
-  updateLatestPosts(posts) {
-    return posts;
-  }
-
-  /**
-   * can't be static due to altjs
-   * @param post
-   * @returns {*}
-   */
-  updatePost(post) {
-    return post;
-  }
-
-  /**
-   * can't be static due to altjs
-   * @param postID
-   * @param revisions
-   * @returns {{postID: *, revisions: *}}
-   */
-  updateRevisions(postID, revisions) {
-    return {
-      postID,
-      revisions,
     };
   }
 }

@@ -29,7 +29,7 @@ function withPostLayout(Post) {
 
     componentDidMount() {
       if (this.props.preview) {
-        PostActions.fetchRevisions.defer(this.props.id, this.props.thumbnailID);
+        PostActions.fetchPreview.defer(this.props.id, this.props.thumbnailID);
       } else {
         PostActions.fetchPost.defer(this.props.id);
       }

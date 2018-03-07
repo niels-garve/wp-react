@@ -8,10 +8,12 @@ const DefaultPost = props => (
   <section>
     {/* TODO implement responsive image */}
     {/* eslint-disable no-underscore-dangle */}
+    {props.post._embedded &&
     <img
       src={props.post._embedded['wp:featuredmedia'][0].media_details.sizes.large.source_url}
       alt={props.post._embedded['wp:featuredmedia'][0].alt_text}
     />
+    }
     {/* eslint-enable no-underscore-dangle */}
     <h2>
       {props.post.title.rendered}
