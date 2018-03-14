@@ -32,7 +32,7 @@ if ( ! function_exists( 'ng_after_setup_theme' ) ) :
 		// load_theme_textdomain('wp-react-theme', get_template_directory() . '/languages');
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
-		set_post_thumbnail_size( 640, 320, true );
+		set_post_thumbnail_size( 148, 148, true );
 		add_theme_support( 'html5', array( 'gallery', 'caption' ) );
 		/**
 		 * Enable support for the following post formats:
@@ -45,7 +45,7 @@ if ( ! function_exists( 'ng_after_setup_theme' ) ) :
 		add_image_size( 'gallery_small_2x', 296, 296, true );
 		add_image_size( 'gallery', 312, 208, true );
 		add_image_size( 'gallery_2x', 624, 416, true );
-		add_image_size( 'post-thumbnail_2x', 1280, 640, true );
+		add_image_size( 'post-thumbnail_2x', 296, 296, true );
 
 		add_editor_style( $editor_css );
 	}
